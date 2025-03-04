@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import Link from "next/link";
-import Logo from "@/assets/svgs/Logo";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { toast } from "sonner";
@@ -21,15 +21,21 @@ import { loginSchema } from "./loginValidation";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import Image from "next/image";
+import logo from './../../../../assets/Screenshot 2025-03-01 014710_prev_ui.png'
 
-export default function LoginForm() {
+export default function LoginPage() {
   const form = useForm({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
+  
 
   const { setIsLoading } = useUser();
   const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
-
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");
   const router = useRouter();
@@ -55,11 +61,7 @@ export default function LoginForm() {
       setIsLoading(true);
       if (res?.success) {
         toast.success(res?.message);
-        if (redirect) {
-          router.push(redirect);
-        } else {
-          router.push("/");
-        }
+        router.push(redirect || "/");
       } else {
         toast.error(res?.message);
       }
@@ -69,100 +71,65 @@ export default function LoginForm() {
   };
 
   return (
-    <motion.div
-      className="border-2  border-gray-300 rounded-3xl max-w-md w-full p-8 bg-gradient-to-r from-blue-500 to-purple-600 shadow-xl"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="flex text-center items-center space-x-4 mb-8">
-
-        <div>
-          <h1 className="text-3xl font-semibold text-white">Login</h1>
-          <p className="font-light text-sm text-gray-100">Welcome back!</p>
+    <div className="flex h-screen bg-gray-100" style={{
+      backgroundImage:
+      "url(https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-black-meat-western-food-banner-background-image_194600.jpg)",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+   
+    }}>
+      <div className="w-full max-w-md m-auto bg-black bg-opacity-95 rounded-lg shadow-xl p-8">
+        <div className="flex justify-center mb-4">
+          <Image src={logo} alt="Logo" width={170} height={60} />
         </div>
-      </div>
 
-      <Form {...form}>
-        <motion.form
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <FormField
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-white">Email</FormLabel>
-                <FormControl>
-                  <motion.div
-                    className="relative"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                  >
-                    <Input
-                      type="email"
-                      {...field}
-                      value={field.value || ""}
-                      className="transition-all focus:ring-2 focus:ring-yellow-500 rounded-lg py-2 px-4"
-                    />
-                  </motion.div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-white">Password</FormLabel>
-                <FormControl>
-                  <motion.div
-                    className="relative"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.3 }}
-                  >
-                    <Input
-                      type="password"
-                      {...field}
-                      value={field.value || ""}
-                      className="transition-all focus:ring-2 focus:ring-yellow-500 rounded-lg py-2 px-4"
-                    />
-                  </motion.div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="flex mt-3 w-full">
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!}
-              onChange={handleReCaptcha}
-              className="mx-auto"
+        <Form {...form}>
+          <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+            <FormField
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-white">Email Address</FormLabel>
+                  <FormControl>
+                    <Input type="email" {...field} className="w-full border-gray-300 rounded-md p-3" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
 
-          <Button
-            disabled={!reCaptchaStatus}
-            onClick={form.handleSubmit(onSubmit)}
-            className="mt-5 w-full bg-yellow-500 hover:bg-yellow-600 transition-all transform hover:scale-105 text-white rounded-full"
-          >
-            {isSubmitting ? "Logging...." : "Login"}
-          </Button>
-        </motion.form>
-      </Form>
+            <FormField
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-white">Password</FormLabel>
+                  <FormControl>
+                    <Input type="password" {...field} className="w-full border-gray-300 rounded-md p-3" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-      <p className="text-sm text-gray-100 text-center my-3">
-        Do not have an account?{" "}
-        <Link href="/register" className="text-yellow-300 hover:underline">
-          Register
-        </Link>
-      </p>
-    </motion.div>
+            <div className="mt-4 flex items-center justify-center">
+              <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!} onChange={handleReCaptcha} />
+            </div>
+
+            <Button
+              disabled={!reCaptchaStatus}
+              onClick={form.handleSubmit(onSubmit)}
+              className="mt-5 w-full bg-violet-600 hover:bg-violet-700 text-white rounded-lg py-3"
+            >
+              {isSubmitting ? "Logging in..." : "LOGIN"}
+            </Button>
+
+         
+            <p className="text-sm text-gray-600 text-center my-4">
+              Don&apos;t have an account? <Link href="/register" className="text-red-600 hover:underline">Sign up</Link>
+            </p>
+          </motion.form>
+        </Form>
+      </div>
+    </div>
   );
 }

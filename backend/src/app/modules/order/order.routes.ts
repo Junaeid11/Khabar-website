@@ -9,7 +9,7 @@ const router = Router();
 router.get(
     '/provider/order',
     auth(UserRole.PROVIDER),
-    OrderController.getMyShopOrders
+    OrderController.getProvidersOrder
 );
 
 router.get(

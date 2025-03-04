@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 export const createOrder = async (order: IOrder) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/order`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/customers/order`, {
       method: "POST",
       headers: {
         Authorization: (await cookies()).get("accessToken")!.value,

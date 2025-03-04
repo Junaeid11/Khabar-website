@@ -41,9 +41,7 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
   matcher: [
     "/login",
-    "/provider",
+    "/customer:page",
     "/provider/:page",
-    "/user",
-    "/user/:page",
   ],
 };

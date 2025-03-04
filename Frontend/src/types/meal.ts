@@ -1,9 +1,4 @@
-type Specification = {
-  processor: string;
-  ram: string;
-  storage: string;
-  display: string;
-};
+
 
 export interface IMeal {
   _id: string;

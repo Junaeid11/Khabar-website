@@ -33,13 +33,12 @@ const MyOrderCard = () => {
   }, []);
 
   if (loading) return <Loading />;
-  if (orders.length === 0) return ( <div>
+  if (orders.length === 0) return ( <div className='flex justify-center items-center'>
     <Image
   src={logo}
   alt={"No data Found"}
-  width={200}
+  width={500}
   height={150}
-  className="w-20 h-20 object-cover rounded-lg"
 />
   </div>)
 

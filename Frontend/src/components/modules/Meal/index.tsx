@@ -6,9 +6,10 @@ import Image from "next/image";
 import Loading from "@/components/ui/loading";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { IMeal } from "@/types";
 
 const Meal = () => {
-    const [meals, setMeals] = useState([]);
+    const [meals, setMeals] = useState<IMeal[]>([]);
     const [loading, setLoading] = useState(true);
 
 

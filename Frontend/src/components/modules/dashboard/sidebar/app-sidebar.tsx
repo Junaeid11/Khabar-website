@@ -31,9 +31,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const data = {
     navMain: user?.role === "customer"
       ? [
-          { title: "Dashboard", url: "/customer/dashboard", icon: SquareTerminal, isActive: true },
-          { title: "My Orders", url: "/customer/my-orders", icon: Bot },
-          { title: "Track Order", url: "/customer/track-order", icon: Bot },
+          { title: "Dashboard", url: "/dashboard/customer", icon: SquareTerminal, isActive: true },
+          { title: "Profile", url: `/dashboard/profile/${user.role}`, icon: Bot ,items: [
+            {
+              title: "Update My Profile",
+              url: `/dashboard/update-my-profile/${user.role}`,
+            },]},
+          { title: "My Orders", url: "/dashboard/customer/my-orders", icon: Bot },
+          { title: "Track Orders", url: "/dashboard/customer/track-order", icon: Bot },
         ]
       : [
         { title: "Dashboard", url: "/dashboard/provider", icon: SquareTerminal, isActive: true },

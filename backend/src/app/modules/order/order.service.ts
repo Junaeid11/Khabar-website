@@ -142,7 +142,6 @@ const getProviderOrder = async (
   console.log("Orders Found:", orders); 
 
   return {
-    meta: { total: orders.length },
     result: orders,
   };
 };

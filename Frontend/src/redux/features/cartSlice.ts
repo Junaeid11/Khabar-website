@@ -4,7 +4,7 @@ import { RootState } from "../store";
 
 export interface CartProduct extends IMeal {
   orderQuantity: number;
-  stock: string
+  stock: number
 
 }
 

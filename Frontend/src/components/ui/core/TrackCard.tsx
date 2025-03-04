@@ -4,6 +4,9 @@ import Loading from "../loading";
 import { useEffect, useState } from "react";
 import { getOrder } from "@/services/order";
 import { TOrder } from "@/types/cart";
+import Image from "next/image";
+
+import logo from '../../../app/20943865.jpg'
 
 const statusSteps = [
   { label: "Preparing", icon: <FaClipboardList size={24} /> },
@@ -32,7 +35,14 @@ export default function OrderTracking() {
   }, []);
 
   if (loading) return <Loading />;
-  if (orders.length === 0) return <p className="text-center text-red-500">No orders found.</p>;
+  if (orders.length === 0) return ( <div className='flex justify-center items-center'>
+    <Image
+  src={logo}
+  alt={"No data Found"}
+  width={500}
+  height={150}
+/>
+  </div>)
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg">

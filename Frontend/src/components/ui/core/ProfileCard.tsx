@@ -45,7 +45,7 @@ const ProfilePage = () => {
       <div className="flex flex-col items-center">
         <div className="relative">
           <Image
-            src={profile.profile.photo}
+            src={profile.profile.photo || "https://static.thenounproject.com/png/354384-200.png"}
             alt="Profile Picture"
             width={150}
             height={150}

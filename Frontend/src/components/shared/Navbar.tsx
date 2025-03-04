@@ -37,7 +37,7 @@ export default function Navbar() {
   };
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/find-meal", label: "Meals" },
+    { href: "/find-meals", label: "Meals" },
 
   ];
 
@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Cart button */}
 
           {user?.role === "customer" ? (
-            <Link href="/cart" passHref>
+            <Link href="/order-meal" passHref>
               <Button variant="outline" className="rounded-full size-10 flex items-center justify-center gap-1">
                 <ShoppingCart className="w-5 h-5" />
 
@@ -116,7 +116,7 @@ export default function Navbar() {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                    <DropdownMenuItem>
-                    <Link href={`/${user?.role}/dashboard`}>Dashboard</Link>
+                    <Link href={`/dashboard/${user?.role}/`}>Dashboard</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="bg-red-500 cursor-pointer" onClick={handleLogOut}>
