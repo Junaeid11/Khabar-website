@@ -19,7 +19,7 @@ const reviewSchema = new Schema<IReview>(
          ref: 'User',
          required: true,
       },
-      product: {
+      meal: {
          type: Schema.Types.ObjectId,
          ref: 'Meal',
          required: true,

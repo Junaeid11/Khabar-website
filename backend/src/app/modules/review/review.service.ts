@@ -17,7 +17,7 @@ const createReview = async (payload: IReview, user: JwtPayload) => {
       const existingReview = await Review.findOne(
          {
             user: user.userId,
-            product: payload.product,
+            meal: payload.meal,
          },
          null,
          { session }
@@ -38,7 +38,7 @@ const createReview = async (payload: IReview, user: JwtPayload) => {
       const reviews = await Review.aggregate([
          {
             $match: {
-               product: review[0].product,
+               meal: review[0].meal,
             },
          },
          {
@@ -53,7 +53,7 @@ const createReview = async (payload: IReview, user: JwtPayload) => {
       const { averageRating = 0, ratingCount = 0 } = reviews[0] || {};
 
       const updatedProduct = await mealModel.findByIdAndUpdate(
-         payload.product,
+         payload.meal,
          { averageRating, ratingCount },
          { session, new: true }
       );

@@ -7,13 +7,13 @@ const router = Router();
 
 // Define routes
 router.get(
-    '/order',
+    '/provider/order',
     auth(UserRole.PROVIDER),
     OrderController.getMyShopOrders
 );
 
 router.get(
-    '/my-orders',
+    '/customers/orders',
     auth(UserRole.USER),
     OrderController.getMyOrders
 );
@@ -25,18 +25,18 @@ router.get(
 );
 
 router.post(
-    '/',
+    '/customers/order',
     auth(UserRole.USER),
     OrderController.createOrder
 )
 
 router.patch(
-    '/:orderId',
+    '/providers/response:orderId',
     auth(UserRole.PROVIDER),
     OrderController.changeOrderStatus
 )
 router.put(
-    '/:orderId',
+    '/providers/response/:orderId',
     auth(UserRole.PROVIDER),
     OrderController.changeStatus
 )

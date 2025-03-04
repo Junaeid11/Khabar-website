@@ -9,10 +9,10 @@ import { productValidation } from './meal.validation';
 
 const router = Router();
 
-router.get('/', MealController.getAllMeal);
+router.get('/menu', MealController.getAllMeal);
 
 
-router.get('/:mealId', MealController.getSingleMeal);
+router.get('/menu/:mealId', MealController.getSingleMeal);
 
 
 router.post(

@@ -21,7 +21,7 @@ const moduleRoutes = [
    },
  
    {
-      path: '/providers',
+      path: '/',
       route: OrderRoutes,
    },
   

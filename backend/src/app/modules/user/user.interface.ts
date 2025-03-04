@@ -3,7 +3,7 @@ import { Document, Model } from 'mongoose';
 // Enum for User Roles
 export enum UserRole {
    PROVIDER = 'provider',
-   USER = 'user'
+   USER = 'customer'
 }
 
 export interface IUser extends Document {

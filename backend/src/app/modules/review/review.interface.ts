@@ -4,7 +4,7 @@ export interface IReview {
    review: string;
    rating: number;
    user: Schema.Types.ObjectId;
-   product: Schema.Types.ObjectId;
+   meal: Schema.Types.ObjectId;
    createdAt?: Date;
    updatedAt?: Date;
 }

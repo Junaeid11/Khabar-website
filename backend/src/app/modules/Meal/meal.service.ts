@@ -91,7 +91,7 @@ const getSingleMeal = async (mealId: string) => {
    if (!meal) {
       throw new AppError(StatusCodes.NOT_FOUND, 'Meal not found');
    }
-   const reviews = await Review.find({ meal: meal._id });
+   const reviews = await Review.find({ meal: meal._id }).populate("user");
 
    const productObj = meal.toObject();
 
