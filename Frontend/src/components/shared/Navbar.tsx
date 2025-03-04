@@ -75,7 +75,7 @@ export default function Navbar() {
 
           {/* Cart button */}
 
-          {user?.role === "user" ? (
+          {user?.role === "customer" ? (
             <Link href="/cart" passHref>
               <Button variant="outline" className="rounded-full size-10 flex items-center justify-center gap-1">
                 <ShoppingCart className="w-5 h-5" />

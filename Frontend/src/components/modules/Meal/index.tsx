@@ -4,19 +4,13 @@ import { useEffect, useState } from "react";
 import { getAllMeal } from "@/services/meal";
 import Image from "next/image";
 import Loading from "@/components/ui/loading";
-import { useDispatch } from "react-redux";
-import { addProduct } from "@/redux/features/cartSlice";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 const Meal = () => {
     const [meals, setMeals] = useState([]);
     const [loading, setLoading] = useState(true);
-    const dispatch = useDispatch()
-    const handleAddProduct = (meals) => {
-        dispatch(addProduct(meals))
-    }
+
 
     useEffect(() => {
         const fetchMeals = async () => {

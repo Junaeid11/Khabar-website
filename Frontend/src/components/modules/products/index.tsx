@@ -2,7 +2,7 @@ import ProductCard from "@/components/ui/core/ProductCard";
 import { IMeal } from "@/types";
 import FilterSidebar from "./filterSidebar";
 
-const AllProducts = ({ products }: { products: IMeal[] }) => {
+const AllProducts = ({ meals }: { meals: IMeal[] }) => {
   return (
     <div className="flex gap-8 my-10">
       <div className="w-full max-w-sm">
@@ -10,8 +10,8 @@ const AllProducts = ({ products }: { products: IMeal[] }) => {
       </div>
       <div>
         <div className="grid grid-cols-3 gap-8">
-          {products?.map((product: IMeal, idx: number) => (
-            <ProductCard key={idx} product={product} />
+          {meals?.map((meal: IMeal, idx: number) => (
+            <ProductCard key={idx} meal={meal} />
           ))}
         </div>
       </div>

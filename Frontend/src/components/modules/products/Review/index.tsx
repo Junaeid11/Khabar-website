@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 import { toast } from "sonner";
 import { addReviews } from "@/services/Review";
 
-const ReviewPostCard = ({ productId }: { productId: string }) => {
+const ReviewPostCard = ({ mealId }: { mealId: string }) => {
   const [review, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -20,11 +20,12 @@ const ReviewPostCard = ({ productId }: { productId: string }) => {
       const reviewData = {
         rating,
         review,
-        product: productId
+        meal: mealId
 
       }
       console.log(reviewData)
       const res = await addReviews(reviewData);
+      console.log(res)
   
       if (res.success) {
         toast.success(res.message);
@@ -45,7 +46,6 @@ const ReviewPostCard = ({ productId }: { productId: string }) => {
     <div className="border p-6 rounded-lg shadow-md bg-white">
       <h3 className="text-lg font-bold text-gray-800">Write a Review</h3>
 
-      {/* Star Rating */}
       <div className="flex gap-1 my-3">
         {[...Array(5)].map((_, i) => (
           <Star
@@ -58,7 +58,6 @@ const ReviewPostCard = ({ productId }: { productId: string }) => {
         ))}
       </div>
 
-      {/* Review Textarea */}
       <textarea
         className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
         rows={3}

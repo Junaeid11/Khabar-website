@@ -4,7 +4,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  role: "user" | "admin"; 
+  role: "customer" | "provider"; 
   isActive: boolean;
   createdAt: string;
   updatedAt: string;

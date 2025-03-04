@@ -29,13 +29,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useUser();
 
   const data = {
-    navMain: user?.role === "user"
+    navMain: user?.role === "customer"
       ? [
-          { title: "Dashboard", url: "/user/dashboard", icon: SquareTerminal, isActive: true },
-          { title: "Track Order", url: "/user/track-order", icon: Bot },
+          { title: "Dashboard", url: "/customer/dashboard", icon: SquareTerminal, isActive: true },
+          { title: "My Orders", url: "/customer/my-orders", icon: Bot },
+          { title: "Track Order", url: "/customer/track-order", icon: Bot },
         ]
       : [
-        //{ title: "Dashboard", url: "/provider/dashboard", icon: SquareTerminal, isActive: true },
+        { title: "Dashboard", url: "/dashboard/provider", icon: SquareTerminal, isActive: true },
         
         { title: "Profile", url: "/provider/profile", icon: Bot ,isActive:true, items: [
           {

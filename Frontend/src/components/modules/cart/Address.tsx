@@ -2,9 +2,8 @@
 
 
 import { Textarea } from "@/components/ui/textarea";
-import { cities } from "@/constants/cities";
 import {
-  shippingAddressSelector,
+
   updateShippingAddress,
 } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";

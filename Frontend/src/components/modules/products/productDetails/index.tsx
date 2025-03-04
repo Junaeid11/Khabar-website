@@ -8,14 +8,15 @@ import { useState } from "react";
 import ReviewCard from "../Review";
 import { useAppDispatch } from "@/redux/hooks";
 import { addProduct } from "@/redux/features/cartSlice";
+import { Card, CardContent } from "@/components/ui/card";
 
-const ProductDetails = ({ meal}: { meal: IMeal }) => {
+const ProductDetails = ({ meal }: { meal: IMeal }) => {
 
-    const dispatch = useAppDispatch();
-    const handleAddProduct = (meal: IMeal) => {
-      dispatch(addProduct(meal));
-      
-    };
+  const dispatch = useAppDispatch();
+  const handleAddProduct = (meal: IMeal) => {
+    dispatch(addProduct(meal));
+
+  };
   const [selectedImage, setSelectedImage] = useState(meal?.imageUrls[0]);
 
   return (
@@ -57,7 +58,7 @@ const ProductDetails = ({ meal}: { meal: IMeal }) => {
           <div className="flex items-center justify-between my-4 text-gray-500 text-sm">
             <span className="flex items-center gap-1 text-yellow-700 font-semibold">
               <Star className="w-5 h-5" fill="orange" stroke="orange" />
-              {meal?.rating} ({meal?.ratingCount} Reviews)
+              {meal?.rating} 
             </span>
             <span className="text-gray-600 font-semibold">Heat & Eat in {meal?.preparationTime} min</span>
           </div>
@@ -78,7 +79,7 @@ const ProductDetails = ({ meal}: { meal: IMeal }) => {
 
           {/* Action Buttons */}
           <div className="flex gap-4 mt-6">
-            <Button  onClick={() => handleAddProduct(meal)}  className="w-full bg-purple-500 hover:bg-black text-white">Add to Cart</Button>
+            <Button onClick={() => handleAddProduct(meal)} className="w-full bg-purple-500 hover:bg-black text-white">Add to Cart</Button>
           </div>
         </div>
       </div>
@@ -91,31 +92,52 @@ const ProductDetails = ({ meal}: { meal: IMeal }) => {
         <p className="mt-4 font-semibold text-lg">How to Prepare:</p>
         <p className="text-gray-600">Keep refrigerated until ready to serve. If desired, vent cover and microwave for 2-3 minutes. Not intended for oven use.</p>
       </div>
-      <ReviewCard productId={meal._id} />
+      <ReviewCard mealId={meal._id} />
       <div className="max-w-6xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg">
         <h3 className="text-xl font-bold text-purple-500">Customer Reviews</h3>
-        
+
 
         {Array.isArray(meal?.reviews) && meal.reviews.length > 0 ? (
-          <div className="mt-4 space-y-4">
-            {meal?.reviews.map((review: any) => (
-              <div key={review._id} className="border-b pb-4">
-                <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 text-yellow-500" />
-                  <span className="font-semibold">{review.rating}/5</span>
-                </div>
-                <p className="text-gray-700 mt-2">{review.review}</p>
-                <p className="text-gray-700 mt-2">{review.user.name}</p>
-                <p className="text-gray-500 text-sm mt-1">
-                Reviewed on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(review.createdAt))}
-
-                </p>
+        meal.reviews.map((review: any) => (
+          <Card key={review._id} className="p-4 shadow-md border rounded-lg bg-neutral-100">
+            <CardContent>
+              <div className="mb-2">
+                <h4 className="font-bold text-lg">{review?.user?.name ?? "Anonymous User"}</h4>
+                <p className="text-gray-600 text-sm">{review?.user?.email ?? "No Email Provided"}</p>
               </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500 mt-2">No reviews yet. Be the first to leave a review!</p>
-        )}
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-5 h-5 ${
+                      i < review.rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
+                    }`}
+                  />
+                ))}
+                <span className="ml-2 font-semibold">{review.rating}/5</span>
+              </div>
+              <div className="mt-2">
+                <textarea
+                  className="w-full p-2 border rounded-lg  focus:outline-none bg-gray-100 text-gray-700"
+                  rows={3}
+                  value={review.review}
+                  readOnly
+                />
+              </div>
+              <p className="text-gray-500 text-right text-sm mt-2">
+                Reviewed on{" "}
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }).format(new Date(review.createdAt))}
+              </p>
+            </CardContent>
+          </Card>
+        ))
+      ) : (
+        <p className="text-gray-500 mt-2">No reviews yet. Be the first to leave a review!</p>
+      )}
 
 
       </div>

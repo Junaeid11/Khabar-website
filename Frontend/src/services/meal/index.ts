@@ -15,7 +15,7 @@ export const getAllMeal = async (
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/providers?limit=${limit}&page=${page}&${params}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/menu?limit=${limit}&page=${page}&${params}`,
       {
         next: {
           tags: ["MEAL"],
@@ -33,7 +33,7 @@ export const getAllMeal = async (
 export const getSingleMeal = async (mealId: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/providers/${mealId}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/menu/${mealId}`,
       {
         next: {
           tags: ["MEAL"],
