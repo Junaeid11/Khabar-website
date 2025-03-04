@@ -41,15 +41,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           { title: "Track Orders", url: "/dashboard/customer/track-order", icon: Bot },
         ]
       : [
-        { title: "Dashboard", url: "/dashboard/provider", icon: SquareTerminal, isActive: true },
+        { title: "Meal Menu", url: "/dashboard/provider", icon: SquareTerminal, isActive: true },
         
-        { title: "Profile", url: "/provider/profile", icon: Bot ,isActive:true, items: [
+        { title: "Profile", url: "/dashboard/provider/profile", icon: Bot ,isActive:true, items: [
           {
             title: "Update Profile",
-            url: "/provider/profile/update-profile",
+            url: "/dashboard/provider/profile/update-profile",
           },]},
-        { title: "View Order", url: "/provider/view-order", icon: ShoppingBasketIcon },
-        { title: "Order Response", url: "/provider/response", icon: ListOrdered },
+        { title: "View Order", url: "/dashboard/provider/view-order", icon: ShoppingBasketIcon },
+        { title: "Order Response", url: "/dashboard/provider/response", icon: ListOrdered },
       ], 
   };
 

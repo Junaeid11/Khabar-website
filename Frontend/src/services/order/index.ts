@@ -23,7 +23,7 @@ export const getOrder = async (): Promise<any> => {
 };
 export const getAllOrder = async (): Promise<any> => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/providers/order`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/provider/order`, {
             method: "GET",
             headers: {
                 Authorization: (await cookies()).get("accessToken")!.value,
@@ -46,7 +46,7 @@ export const updateOrder = async (
   
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/providers/${orderId}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/providers/response/${orderId}`,
       {
         method: "PATCH",
         headers: {
@@ -68,7 +68,7 @@ export const updateStatus = async (
 ): Promise<any> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/providers/${orderId}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/providers/response/${orderId}`,
       {
         method: "PUT",
         headers: {

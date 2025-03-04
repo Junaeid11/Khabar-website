@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button";
 import NMContainer from "@/components/ui/core/NMContainer";
 import ProductCard from "@/components/ui/core/ProductCard";
 import { getAllMeal } from "@/services/meal";
-import { IMeal } from "@/types";
+import { IMeal } from "@/types/meal";
 import Link from "next/link";
 
-const FeaturedProducts = async () => {
-  const { data: products } = await getAllMeal();
+const FeatureMeals = async () => {
+  const { data: meals } = await getAllMeal();
 
   return (
     <div className=" bg-white bg-opacity-50 pt-6 pb-8">
@@ -16,12 +16,12 @@ const FeaturedProducts = async () => {
 
         </div>
         <div className="grid grid-cols-3 gap-4 mt-10">
-          {products?.slice(0, 3).map((product: IMeal, idx: number) => (
+          {meals?.slice(0, 3).map((product: IMeal, idx: number) => (
             <ProductCard key={idx} meal={product} />
           ))}
         </div>
         <div className="text-center pt-10">
-  <Link href="/find-meal">
+  <Link href="/find-meals">
     <Button 
       variant="outline" 
       className="px-6 py-3 text-lg font-semibold rounded-full border-1 border-black text-violet-500 hover:bg-violet-500 hover:text-white transition duration-300 shadow-md"
@@ -37,4 +37,4 @@ const FeaturedProducts = async () => {
   );
 };
 
-export default FeaturedProducts;
+export default FeatureMeals;

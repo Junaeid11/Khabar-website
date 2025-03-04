@@ -119,7 +119,7 @@ export default function Navbar() {
                     <Link href={`/dashboard/${user?.role}/`}>Dashboard</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="bg-red-500 cursor-pointer" onClick={handleLogOut}>
+                  <DropdownMenuItem className="bg-violet-500 text-white cursor-pointer" onClick={handleLogOut}>
                     <LogOut />
                     <span>Log Out</span>
                   </DropdownMenuItem>

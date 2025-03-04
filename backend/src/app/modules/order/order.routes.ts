@@ -31,7 +31,7 @@ router.post(
 )
 
 router.patch(
-    '/providers/response:orderId',
+    '/providers/response/:orderId',
     auth(UserRole.PROVIDER),
     OrderController.changeOrderStatus
 )

@@ -5,14 +5,13 @@ export interface IMeal {
   name: string;
   description: string;
   slug:string;
-  provider:   string; 
+  provider:   {
+    name: string
+  }; 
   ingredients: string[];
   price: number;
   dietaryTags: string[];
-  category: {
-    _id: string;
-    name: string;
-  };
+  
   imageUrls: string[];
   isActive: boolean;
   rating?: number;

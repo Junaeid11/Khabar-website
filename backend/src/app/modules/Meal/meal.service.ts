@@ -62,7 +62,7 @@ const getAllMeal = async (query: Record<string, unknown>) => {
 
 
    const mealQuery = new QueryBuilder(
-      mealModel.find()
+      mealModel.find().populate('provider')
       ,
       pQuery
    )

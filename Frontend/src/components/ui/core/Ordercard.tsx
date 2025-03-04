@@ -22,6 +22,7 @@ const OrderCard = () => {
     const fetchOrders = async () => {
       try {
         const { data } = await getAllOrder();
+        console.log(data)
         setOrders(data);
       } catch (error) {
         console.error("Error fetching orders:", error);

@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -42,7 +41,7 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          <Link href="/find-meal">
+          <Link href="/find-meals">
             <Button className="bg-white text-purple-400 text-lg font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-black transition">
               Find Your Meal
             </Button>

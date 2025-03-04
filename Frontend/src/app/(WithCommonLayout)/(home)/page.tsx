@@ -1,6 +1,6 @@
 
 import DeliverySection from "@/components/modules/home/delevery";
-import FeaturedProducts from "@/components/modules/home/FeaturedProducts"; 
+import FeatureMeals from "@/components/modules/home/FeaturedProducts";
 import HeroSection from "@/components/modules/home/HeroSection";
 
 const HomePage = async () => {
@@ -8,7 +8,7 @@ const HomePage = async () => {
     <div>
       <HeroSection />
       <DeliverySection />
-      <FeaturedProducts />
+      <FeatureMeals/>
     
     </div>
   );

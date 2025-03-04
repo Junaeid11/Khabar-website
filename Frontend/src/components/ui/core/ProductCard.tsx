@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/card";
 import { addProduct } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import { IMeal } from "@/types/meal";
 
-import { IMeal } from "@/types";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+import {  ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -75,7 +75,7 @@ const ProductCard = ({ meal }: { meal: IMeal }) => {
       <CardFooter className="block p-0">
         <div className="flex gap-2 items-center justify-between">
          
-        <Link href={`/find-meal/${meal._id}`} passHref>
+        <Link href={`/find-meals/${meal._id}`} passHref>
           <Button
             size="sm"
             variant="outline"

@@ -2,7 +2,6 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-// get all products
 export const getAllMeal = async (
   page?: string,
   limit?: string,
@@ -18,7 +17,7 @@ export const getAllMeal = async (
       `${process.env.NEXT_PUBLIC_BASE_API}/menu?limit=${limit}&page=${page}&${params}`,
       {
         next: {
-          tags: ["MEAL"],
+          revalidate: 0,
         },
       }
     );
@@ -29,7 +28,6 @@ export const getAllMeal = async (
   }
 };
 
-// get single product
 export const getSingleMeal = async (mealId: string) => {
   try {
     const res = await fetch(
@@ -47,7 +45,6 @@ export const getSingleMeal = async (mealId: string) => {
   }
 };
 
-// add product
 export const addMeal = async (mealData: FormData): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/providers/menu`, {
@@ -64,7 +61,6 @@ export const addMeal = async (mealData: FormData): Promise<any> => {
   }
 };
 
-// update product
 export const updateMealMenu = async (
   mealData: FormData,
   mealId: string
