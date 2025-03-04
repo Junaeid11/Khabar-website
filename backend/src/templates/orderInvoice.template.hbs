@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KHABAR Invoice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      border-bottom: 3px solid #5e03fc;
+      padding-bottom: 15px;
+    }
+
+    .header img {
+      width: 150px;
+    }
+
+    .header h2 {
+      margin: 10px 0 0;
+      color: ##0320fc;
+      font-size: 22px;
+    }
+
+    .content {
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .content p {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #ff9800;
+      color: #fff;
+      padding: 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .button:hover {
+      background: #e68900;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    .footer a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://res.cloudinary.com/dkdkimfrd/image/upload/v1740941720/Screenshot_2025-03-01_014710_prev_ui_vnyszu.png" alt="KHABAR Logo">
+      <h2>Thank You for Ordering!</h2>
+    </div>
+    
+    <div class="content">
+      <p>Hi <strong>{{userName}}</strong>,</p>
+      <p>We truly appreciate your order with KHABAR. Your delicious meal is on its way! 🍽️</p>
+      <p>At <span style="color:#3103fc">KHABAR</span>, we believe in bringing joy through food, and we’re grateful to have you as part of our foodie family.</p>
+      <p>If you have any questions, feel free to reach out—we're always happy to help!</p>
+      <p>Bon appétit! 😋</p>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2025 KHABAR. All rights reserved.</p>
+      <p>Need help? <a href="junaeidahmed121@gmail.com">Contact Us</a> | Follow us on <a href="#">Instagram</a></p>
+    </div>
+  </div>
+</body>
+
+</html>
