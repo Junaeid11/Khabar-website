@@ -35,6 +35,15 @@ KHABAR is a personalized meal planning and delivery platform designed to connect
 - Customers can search for meals based on **cuisine, dietary preferences, ratings, and availability**.
 - Meal providers can view customer preferences and **prepare orders accordingly**.
 
+### 5️⃣ Order Tracking
+- Customers can **track their orders** in real-time from preparation to delivery.
+
+### 6️⃣ Payment Integration
+- Secure payment processing using **SurjoPay**.
+
+### 7️⃣ Purchase Meals
+- Users can **buy meals** directly through the platform.
+
 ## 📡 API Endpoints
 
 ### **Customers**
