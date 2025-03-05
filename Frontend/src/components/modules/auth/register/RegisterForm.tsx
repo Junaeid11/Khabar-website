@@ -43,7 +43,7 @@ export default function RegisterForm() {
       setIsLoading(true);
       if (res?.success) {
         toast.success(res?.message);
-        router.push("/"); // Redirect to home after successful registration
+        router.push("/"); 
       } else {
         toast.error(res?.message);
       }

@@ -4,7 +4,7 @@ import { IJwtPayload } from './auth.interface';
 export const createToken = (
     jwtPayload: IJwtPayload,
     secret: Secret,
-    expiresIn: string ,
+    expiresIn: any ,
 ) => {
     return jwt.sign(jwtPayload, secret, {
         expiresIn,

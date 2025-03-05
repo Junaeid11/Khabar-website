@@ -5,7 +5,6 @@ import { UserRole } from '../user/user.interface';
 
 const router = Router();
 
-// Define routes
 router.get(
     '/provider/order',
     auth(UserRole.PROVIDER),

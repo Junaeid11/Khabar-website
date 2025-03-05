@@ -6,13 +6,13 @@ import Loading from "@/components/ui/loading";
 
 const LoginPage = () => {
   return (
-    <div className="mx-auto " 
->
+    <div className="mx-auto">
       <Suspense fallback={<div><Loading/></div>}>
         <LoginForm />
       </Suspense>
     </div>
   );
 };
+
 
 export default LoginPage;

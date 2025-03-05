@@ -16,13 +16,13 @@ router.post(
    AuthController.refreshToken
 );
 
-router.post(
-   '/change-password',
-   auth(UserRole.PROVIDER, UserRole.USER),
-   AuthController.changePassword
-);
+// router.post(
+//    '/change-password',
+//    auth(UserRole.PROVIDER, UserRole.USER),
+//    AuthController.changePassword
+// );
 
-router.post('/forgot-password', AuthController.forgotPassword);
-router.post('/reset-password', AuthController.resetPassword);
+// router.post('/forgot-password', AuthController.forgotPassword);
+// router.post('/reset-password', AuthController.resetPassword);
 
 export const AuthRoutes = router;

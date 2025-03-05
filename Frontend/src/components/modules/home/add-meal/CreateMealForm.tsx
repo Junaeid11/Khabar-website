@@ -17,9 +17,8 @@ import { useState } from "react";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
 import { addMeal } from "@/services/meal";
 import { toast } from "sonner";
-import dynamic from "next/dynamic"; // ✅ Fix hydration issue by disabling SSR
+import dynamic from "next/dynamic"; 
 
-// Dynamically import react-select (fixes hydration mismatch in Next.js)
 const Select = dynamic(() => import("react-select"), { ssr: false });
 
 export default function CreateMealForm() {
