@@ -47,7 +47,7 @@ export const getSingleMeal = async (mealId: string) => {
 
 export const addMeal = async (mealData: FormData): Promise<any> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/providers/menu`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/menu`, {
       method: "POST",
       body: mealData,
       headers: {
@@ -67,10 +67,29 @@ export const updateMealMenu = async (
 ): Promise<any> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/providers/${mealId}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/${mealId}`,
       {
         method: "PATCH",
         body: mealData,
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+      }
+    );
+    revalidateTag("MEAL");
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+export const deleteMenu = async (
+  mealId: string
+): Promise<any> => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/${mealId}`,
+      {
+        method: "DELETE",
         headers: {
           Authorization: (await cookies()).get("accessToken")!.value,
         },

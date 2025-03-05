@@ -1,6 +1,7 @@
-import { IMeal } from "@/types";
+
 import {  createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { IMeal } from "@/types/meal";
 
 export interface CartProduct extends IMeal {
   orderQuantity: number;

@@ -1,10 +1,10 @@
 export interface IOrder {
-  products: IOrderProduct[];
+  products: IOrderMeal[];
   shippingAddress: string;
   paymentMethod: string;
 }
 
-export interface IOrderProduct {
+export interface IOrderMeal {
   meal: string;
   quantity: number;
   deliverySchedule: string,
@@ -54,7 +54,7 @@ interface Meal {
   __v: number;
 }
 
-interface Product {
+interface meal {
   meal: Meal;
   quantity: number;
   deliverySchedule: string;
@@ -66,7 +66,7 @@ export interface TOrder {
   transaction: Transaction;
   _id: string;
   user: User;
-  products: Product[];
+  products: meal[];
   totalAmount: number;
   status: string;
   orderStatus: string;

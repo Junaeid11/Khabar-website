@@ -28,3 +28,20 @@ export interface IMeal {
   updatedAt?: Date;
   stock: number
 }
+  export interface IMealForm {
+    name: string;
+    description: string;
+    slug: string;
+    ingredients: string;
+    price: string;
+    stock: string;
+    rating: string;
+    ratingCount: string;
+    preparationTime: string;
+    calories: string;
+    protein: string;
+    carbs: string;
+    fat: string;
+    dietaryTags: string[];
+}
+

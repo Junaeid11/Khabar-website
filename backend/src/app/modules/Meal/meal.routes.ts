@@ -34,7 +34,7 @@ router.patch(
 
 router.delete(
    '/:mealId',
-   auth(UserRole.USER),
+   auth(UserRole.PROVIDER),
    MealController.deleteProduct
 );
 
