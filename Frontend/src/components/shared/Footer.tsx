@@ -5,14 +5,13 @@ const Footer = () => {
     return (
         <footer className="flex mx-auto mt-10 pt-10 h-full text-white bg-slate-100 dark:bg-black dark:text-white flex-col space-y-10 justify-center py-5">
             <div className="flex place-content-center">
-                <h1 className="text-black dark:text-white text-center font-extrabold text-3xl">Noob Work</h1>
+                <h1 className="text-black dark:text-white text-center font-extrabold text-3xl">Khabar</h1>
             </div>
 
             <nav className="flex justify-center flex-wrap gap-6 text-gray-500 font-medium">
                 <Link href="/" className="hover:text-gray-900">Home</Link>
                 <Link href="/find-meals" className="hover:text-gray-900">Meal</Link>
-                <Link href="/orders" className="hover:text-gray-900">Blog</Link>
-                <Link href="/contact" className="hover:text-gray-900">Contact</Link>
+                <Link href="/" className="hover:text-gray-900">Orders</Link>
             </nav>
 
             <div className="flex justify-center space-x-5">
