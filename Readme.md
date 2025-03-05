@@ -2,6 +2,8 @@
 
 KHABAR is a personalized meal planning and delivery platform designed to connect customers with meal providers seamlessly. Built using the **MERN stack** with **Next.js**, it offers a feature-rich experience for both customers and meal providers.
 
+[Live Demo](https://khabar-box.vercel.app)
+
 ## 🚀 Technologies Used
 
 ### **Frontend Development**
