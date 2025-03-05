@@ -10,8 +10,8 @@ const Footer = () => {
 
             <nav className="flex justify-center flex-wrap gap-6 text-gray-500 font-medium">
                 <Link href="/" className="hover:text-gray-900">Home</Link>
-                <Link href="/projects" className="hover:text-gray-900">Projects</Link>
-                <Link href="/blog" className="hover:text-gray-900">Blog</Link>
+                <Link href="/find-meals" className="hover:text-gray-900">Meal</Link>
+                <Link href="/orders" className="hover:text-gray-900">Blog</Link>
                 <Link href="/contact" className="hover:text-gray-900">Contact</Link>
             </nav>
 

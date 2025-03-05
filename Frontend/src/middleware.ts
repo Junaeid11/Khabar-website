@@ -43,5 +43,6 @@ export const config = {
     "/login",
     "/customer:page",
     "/provider/:page",
+    "/post-meal-menu"
   ],
 };

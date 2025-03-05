@@ -1,6 +1,7 @@
 "use client";
+import { useState } from "react";
 import { Button } from "../ui/button";
-import { Heart, LogOut, ShoppingCart } from "lucide-react";
+import {  LogOut, ShoppingCart, Menu } from "lucide-react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -17,8 +18,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/contants";
 import { useAppSelector } from "@/redux/hooks";
 import { orderedProductsSelector } from "@/redux/features/cartSlice";
-import { useState, useEffect } from "react";
-import Image from 'next/image';
+import Image from "next/image";
 import logo from '../../assets/Screenshot 2025-03-01 014710_prev_ui.png';
 import { motion } from "framer-motion";
 
@@ -27,6 +27,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const products = useAppSelector(orderedProductsSelector);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogOut = () => {
     logout();
@@ -35,97 +36,88 @@ export default function Navbar() {
       router.push("/");
     }
   };
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/find-meals", label: "Meals" },
-
   ];
 
   return (
-    <header
+    <header className="bg-white shadow-md rounded-b-2xl">
+      <div className="container mx-auto flex justify-between items-center h-16 px-5">
+        <Link href="/">
+          <Image src={logo} height={50} width={150} alt="logo" />
+        </Link>
+        <button
+          className="md:hidden text-black"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <Menu size={24} />
+        </button>
 
-    >
-      <div className="container  rounded-b-2xl flex justify-between items-center mx-auto h-16 px-5">
-        {/* Logo */}
-        <Image src={logo} height={200} width={200} alt="logo" />
-
-        {/* Navigation links */}
-        <nav className="flex items-center space-x-6 relative">
+        <nav className={`grid lg:flex items-center space-x-6 ${isOpen ? "block" : "hidden"} absolute md:relative top-16 md:top-0 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-5 md:p-0 z-50`}>
           {navLinks.map(({ href, label }) => (
             <div key={href} className="relative">
               <motion.div
                 initial={{ width: 0 }}
-                animate={{
-                  width: pathname === href ? "100%" : 0,
-                }}
+                animate={{ width: pathname === href ? "100%" : 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute bottom-0 left-0 h-1 bg-red-500"
+                className="absolute bottom-0 left-0 h-1 bg-black"
               />
               <Link
                 href={href}
-                className={`${pathname === href
-                  ? "dark:text-red-500 text-red-500 font-bold"
-                  : "text-black hover:text-red-500"
-                  }`}
+                className={`block py-2 md:py-0 ${
+                  pathname === href
+                    ? "text-violet-500 font-bold"
+                    : "text-black hover:text-violet-500"
+                }`}
               >
                 {label}
               </Link>
             </div>
           ))}
 
-          {/* Cart button */}
-
-          {user?.role === "customer" ? (
+          {user?.role === "customer" && (
             <Link href="/order-meal" passHref>
-              <Button variant="outline" className="rounded-full size-10 flex items-center justify-center gap-1">
+              <Button variant="outline" className="rounded-full flex items-center gap-1">
                 <ShoppingCart className="w-5 h-5" />
-
-
                 <span className="text-red-500 font-bold">{products?.length ?? 0}</span>
               </Button>
             </Link>
-          ) : (
-
-            null
-
           )}
 
-
-          {user?.role === "provider" ? (
-            <Link href={"post-meal-menu"}>
-              <Button className="rounded-full bg-indigo-500 text-white font-extrabold">Add New Meal</Button>
+          {user?.role === "provider" && (
+            <Link href="post-meal-menu">
+              <Button className="rounded-full hover:bg-black hover:text-violet-500 bg-indigo-500 text-white font-extrabold">
+                Add New Meal
+              </Button>
             </Link>
-          ) : (
-
-            null
-
           )}
 
           {user?.email ? (
-            <>
-
-              {/* Dropdown Menu */}
-              <DropdownMenu>
-                <DropdownMenuTrigger className="transition-all duration-300 ease-in-out">
-                  <Avatar>
-                    <AvatarImage src="https://cdn-icons-png.flaticon.com/512/4264/4264818.png" />
-                    <AvatarFallback>User</AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="transition-all duration-300 ease-in-out">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                   <DropdownMenuItem>
-                    <Link href={`/dashboard/${user?.role}/`}>Dashboard</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="bg-violet-500 text-white cursor-pointer" onClick={handleLogOut}>
-                    <LogOut />
-                    <span>Log Out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarImage src="https://cdn-icons-png.flaticon.com/512/4264/4264818.png" />
+                  <AvatarFallback>User</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link href={`/dashboard/${user?.role}/`}>Dashboard</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className="bg-violet-500 text-white cursor-pointer"
+                  onClick={handleLogOut}
+                >
+                  <LogOut />
+                  <span>Log Out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <Link href="/login">
               <Button className="rounded-full" variant="outline">
@@ -135,7 +127,6 @@ export default function Navbar() {
           )}
         </nav>
       </div>
-
     </header>
   );
 }

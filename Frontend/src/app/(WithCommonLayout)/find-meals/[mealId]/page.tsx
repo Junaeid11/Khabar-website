@@ -1,5 +1,5 @@
 
-import MealDetails from "@/components/modules/products/MealDetails";
+import MealDetails from "@/components/modules/Meals/MealDetails";
 import { getSingleMeal } from "@/services/meal";
 
 const ProductDetailsPage = async ({params}:{params: any}) => {

@@ -27,7 +27,7 @@ const MealDetails = ({ meal }: { meal: IMeal }) => {
         <div>
           <div className="relative">
             <Image
-              src={selectedImage}
+              src={selectedImage || "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"}
               alt="product image"
               width={500}
               height={500}
@@ -38,7 +38,7 @@ const MealDetails = ({ meal }: { meal: IMeal }) => {
             {meal?.imageUrls.slice(0, 3).map((image, idx) => (
               <Image
                 key={idx}
-                src={image}
+                src={image || "https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-thumbnail-graphic-illustration-vector-png-image_40966590.jpg"}
                 alt="product thumbnail"
                 width={100}
                 height={100}
@@ -119,7 +119,7 @@ const MealDetails = ({ meal }: { meal: IMeal }) => {
       </div>
 
       {/* Reviews Section */}
-      <ReviewCard mealId={meal._id} />
+      <ReviewCard mealId={meal?._id} />
       <div className="max-w-6xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg">
         <h3 className="text-xl font-bold text-purple-500">Customer Reviews</h3>
 

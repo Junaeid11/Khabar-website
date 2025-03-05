@@ -17,18 +17,18 @@ import { useState } from "react";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
 import { addMeal } from "@/services/meal";
 import { toast } from "sonner";
-import Select from "react-select"; 
+import dynamic from "next/dynamic"; // ✅ Fix hydration issue by disabling SSR
+
+// Dynamically import react-select (fixes hydration mismatch in Next.js)
+const Select = dynamic(() => import("react-select"), { ssr: false });
 
 export default function CreateMealForm() {
     const [imageFiles, setImageFiles] = useState<File[]>([]);
     const [imagePreview, setImagePreview] = useState<string[]>([]);
-    const [selectedTags, setSelectedTags] = useState<string[]>([]); 
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
     const form = useForm();
-
-    const {
-        formState: { isSubmitting },
-    } = form;
+    const { formState: { isSubmitting } } = form;
 
     const allowedDietaryTags = [
         "vegan", "vegetarian", "gluten-free", "keto", "paleo", "halal", "kosher"
@@ -36,55 +36,56 @@ export default function CreateMealForm() {
 
     const tagOptions = allowedDietaryTags.map(tag => ({
         value: tag,
-        label: tag.charAt(0).toUpperCase() + tag.slice(1) 
+        label: tag.charAt(0).toUpperCase() + tag.slice(1)
     }));
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const modifiedData = {
             ...data,
-            ingredients: Array.isArray(data.ingredients) ? data.ingredients : data.ingredients.split(",").map((i :any) => i.trim()),
+            ingredients: typeof data.ingredients === "string" && data.ingredients.trim()
+                ? data.ingredients.split(",").map((i: any) => i.trim())
+                : [], 
             dietaryTags: selectedTags,
-            price: parseFloat(data.price),
-            stock: parseInt(data.stock),
-            rating: parseFloat(data.rating),
-            ratingCount: parseInt(data.ratingCount),
-            preparationTime: parseInt(data.preparationTime),
-            calories: parseInt(data.calories),
-            protein: parseInt(data.protein),
-            carbs: parseInt(data.carbs),
-            fat: parseInt(data.fat),
+            price: parseFloat(data.price) || 0,
+            stock: parseInt(data.stock) || 0,
+            rating: parseFloat(data.rating) || 0,
+            ratingCount: parseInt(data.ratingCount) || 0,
+            preparationTime: parseInt(data.preparationTime) || 0,
+            calories: parseInt(data.calories) || 0,
+            protein: parseInt(data.protein) || 0,
+            carbs: parseInt(data.carbs) || 0,
+            fat: parseInt(data.fat) || 0,
         };
-
+    
         try {
             const formData = new FormData();
             formData.append("data", JSON.stringify(modifiedData));
             if (imageFiles.length > 0) {
-                formData.append("images", imageFiles[0]); 
+                formData.append("images", imageFiles[0]);
             }
-
+    
             const res = await addMeal(formData);
-            console.log(res)
-            
-            
-
+            console.log(res);
+    
             if (res?.success) {
-                form.reset()
-                toast.success(res.message );
+                form.reset();
+                setSelectedTags([]);
+                toast.success(res.message);
             } else {
-                toast.error(res?.message );
+                toast.error(res?.message);
             }
         } catch (err) {
-            toast.error("An error occurred. Please try again.",);
+            toast.error("An error occurred. Please try again.");
         }
     };
-
+    
     return (
         <div className="rounded-xl flex-grow mx-10 p-5 my-5">
-            <h1 className="text-xl font-semibold mb-2">Create Meal</h1>
+            <h1 className="text-2xl text-violet-400 text-center font-semibold mb-2">Create Meal</h1>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        {[ 
+                        {[
                             { name: "name", label: "Meal Name" },
                             { name: "description", label: "Description" },
                             { name: "slug", label: "Slug" },
@@ -115,6 +116,8 @@ export default function CreateMealForm() {
                             />
                         ))}
                     </div>
+
+                    {/* Dietary Tags Selector - Fixed Hydration Issue */}
                     <div className="space-y-2 mt-4">
                         <FormLabel className="text-sm font-medium">Dietary Tags</FormLabel>
                         <Select
@@ -123,8 +126,9 @@ export default function CreateMealForm() {
                             className="basic-multi-select"
                             classNamePrefix="select"
                             onChange={(selectedOptions) =>
-                                setSelectedTags(selectedOptions.map(option => option.value))
+                                setSelectedTags(Array.isArray(selectedOptions) ? selectedOptions.map(option => option.value) : [])
                             }
+                            value={tagOptions.filter(option => selectedTags.includes(option.value))}
                         />
                     </div>
 

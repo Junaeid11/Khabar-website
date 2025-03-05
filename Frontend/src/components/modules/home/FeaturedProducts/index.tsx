@@ -15,7 +15,7 @@ const FeatureMeals = async () => {
           <h2 className="text-3xl font-bold">Meal Menus</h2>
 
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
           {meals?.slice(0, 3).map((product: IMeal, idx: number) => (
             <ProductCard key={idx} meal={product} />
           ))}
