@@ -4,6 +4,8 @@ import { AuthRoutes } from '../modules/auth/auth.routes';
 import { MealRoutes } from '../modules/Meal/meal.routes';
 import { OrderRoutes } from '../modules/order/order.routes';
 import { ReviewRoutes } from '../modules/review/review.routes';
+import { CategoryRoutes } from '../modules/category/category.routes';
+import { BlogRoute } from '../modules/Blog/blog.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -19,6 +21,10 @@ const moduleRoutes = [
       path: '/',
       route: MealRoutes,
    },
+   {
+      path: '/',
+      route: CategoryRoutes,
+   },
  
    {
       path: '/',
@@ -29,6 +35,10 @@ const moduleRoutes = [
    {
       path: '/review',
       route: ReviewRoutes,
+   },
+   {
+      path: '/blogs',
+      route: BlogRoute,
    },
 ];
 

@@ -8,6 +8,7 @@ export interface IMeal {
   provider:   {
     name: string
   }; 
+  category:string
   ingredients: string[];
   price: number;
   dietaryTags: string[];

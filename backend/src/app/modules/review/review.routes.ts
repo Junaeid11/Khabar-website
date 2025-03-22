@@ -6,8 +6,7 @@ import { UserRole } from '../user/user.interface';
 const router = Router();
 
 router.get(
-    '/',
-    auth(UserRole.PROVIDER),
+    '/all',
     ReviewControllers.getAllReviews
 );
 router.post(

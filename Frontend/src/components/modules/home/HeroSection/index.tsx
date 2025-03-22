@@ -6,13 +6,16 @@ import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center rounded-2xl"
+    <div className="relative flex min-h-screen items-center justify-center bg-cover bg-center "
     style={{
       backgroundImage:
-        "url(https://i.pinimg.com/736x/33/ef/8b/33ef8b9c0b902154a6cd4103a21275ef.jpg)",
+        "url(https://images.unsplash.com/photo-1505935428862-770b6f24f629?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
       backgroundSize: "cover",
       backgroundPosition: "center",
-      borderRadius: "20px",
+
+      borderRadius:'20px'
+
+
     }}
     >
       <div className="relative bg-white p-10 rounded-lg shadow-xl text-center max-w-lg">

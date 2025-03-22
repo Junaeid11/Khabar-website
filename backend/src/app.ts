@@ -9,7 +9,7 @@ import notFound from "./app/middleware/notFound";
 const app: Application = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({ origin: "https://khabar-box.vercel.app" }));
+app.use(cors({ origin: "http://localhost:3000" }));
 
 app.use(express.urlencoded({ extended: true }));
 

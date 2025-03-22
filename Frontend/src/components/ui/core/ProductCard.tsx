@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useUser } from "@/context/UserContext";
 import { addProduct } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { IMeal } from "@/types/meal";
@@ -17,6 +18,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ProductCard = ({ meal }: { meal: IMeal }) => {
+
+    const { user, setIsLoading } = useUser();
   const dispatch = useAppDispatch();
 
   const handleAddProduct = (meal: IMeal) => {
@@ -86,13 +89,15 @@ const ProductCard = ({ meal }: { meal: IMeal }) => {
           </Link>
           <Button
             onClick={() => handleAddProduct(meal)}
-            disabled={meal?.stock === 0}
+            disabled={meal?.stock === 0 || user?.role !== "customer"}
             variant="outline"
             size="sm"
             className="w-8 h-8 p-0 flex items-center justify-center rounded-full"
           >
-            <ShoppingCart />
+              <ShoppingCart />
+          
           </Button>
+
         </div>
       </CardFooter>
     </Card>

@@ -6,6 +6,11 @@ const MealSchema = new Schema<IMeal>(
     name: { type: String, required: true },
     description: { type: String, required: true },
     slug: { type: String,  unique: true },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      required: [true, 'Category is required'],
+   },
     provider: { type: Schema.Types.ObjectId, ref: "User", required: true },
     ingredients: { type: [String], required: true },
     price: { type: Number, required: true },

@@ -1,7 +1,8 @@
 "use client";
+
 import { useState } from "react";
 import { Button } from "../ui/button";
-import {  LogOut, ShoppingCart, Menu } from "lucide-react";
+import { LogOut, ShoppingCart, Menu } from "lucide-react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -19,7 +20,7 @@ import { protectedRoutes } from "@/contants";
 import { useAppSelector } from "@/redux/hooks";
 import { orderedProductsSelector } from "@/redux/features/cartSlice";
 import Image from "next/image";
-import logo from '../../assets/Screenshot 2025-03-01 014710_prev_ui.png';
+import logo from "../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 import { motion } from "framer-motion";
 
 export default function Navbar() {
@@ -40,14 +41,18 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/find-meals", label: "Meals" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/contact", label: "Contact" },
+    { href: "/about", label: "About" },
   ];
 
   return (
-    <header className="bg-white shadow-md rounded-b-2xl">
+    <header className="sticky top-0 z-50 bg-[#fce7b2] mx-auto shadow-md rounded-b-2xl">
       <div className="container mx-auto flex justify-between items-center h-16 px-5">
         <Link href="/">
           <Image src={logo} height={50} width={150} alt="logo" />
         </Link>
+
         <button
           className="md:hidden text-black"
           onClick={() => setIsOpen(!isOpen)}
@@ -55,21 +60,25 @@ export default function Navbar() {
           <Menu size={24} />
         </button>
 
-        <nav className={`grid lg:flex items-center space-x-6 ${isOpen ? "block" : "hidden"} absolute md:relative top-16 md:top-0 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-5 md:p-0 z-50`}>
+        <nav
+          className={`grid md:flex items-center space-x-6 ${
+            isOpen ? "block" : "hidden"
+          } absolute md:relative top-16 md:top-0 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-5 md:p-0 z-50`}
+        >
           {navLinks.map(({ href, label }) => (
             <div key={href} className="relative">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: pathname === href ? "100%" : 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute bottom-0 left-0 h-1 bg-black"
+                className="absolute bottom-0 left-0 h-1 bg-[#2a47c8]"
               />
               <Link
                 href={href}
                 className={`block py-2 md:py-0 ${
                   pathname === href
-                    ? "text-violet-500 font-bold"
-                    : "text-black hover:text-violet-500"
+                    ? "text-[#7a20e1] font-bold"
+                    : "text-black hover:text-[#7B2CBF]"
                 }`}
               >
                 {label}
@@ -77,23 +86,26 @@ export default function Navbar() {
             </div>
           ))}
 
+          {/* Customer Cart Button */}
           {user?.role === "customer" && (
             <Link href="/order-meal" passHref>
               <Button variant="outline" className="rounded-full flex items-center gap-1">
                 <ShoppingCart className="w-5 h-5" />
-                <span className="text-red-500 font-bold">{products?.length ?? 0}</span>
+                <span className="text-[#E63946] font-bold">{products?.length ?? 0}</span>
               </Button>
             </Link>
           )}
 
+          {/* Provider Add Meal Button */}
           {user?.role === "provider" && (
             <Link href="post-meal-menu">
-              <Button className="rounded-full hover:bg-black hover:text-violet-500 bg-indigo-500 text-white font-extrabold">
+              <Button className="rounded-full hover:bg-black hover:text-[#7B2CBF] bg-indigo-500 text-white font-extrabold">
                 Add New Meal
               </Button>
             </Link>
           )}
 
+          {/* User Dropdown */}
           {user?.email ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -110,7 +122,7 @@ export default function Navbar() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
-                  className="bg-violet-500 text-white cursor-pointer"
+                  className="bg-[#7B2CBF] text-white cursor-pointer"
                   onClick={handleLogOut}
                 >
                   <LogOut />

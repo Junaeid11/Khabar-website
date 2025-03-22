@@ -22,7 +22,7 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import Image from "next/image";
-import logo from './../../../../assets/Screenshot 2025-03-01 014710_prev_ui.png'
+import logo from "./../../../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 
 export default function LoginPage() {
   const form = useForm({
@@ -32,7 +32,6 @@ export default function LoginPage() {
       password: "",
     },
   });
-  
 
   const { setIsLoading } = useUser();
   const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
@@ -42,6 +41,7 @@ export default function LoginPage() {
 
   const {
     formState: { isSubmitting },
+    setValue,
   } = form;
 
   const handleReCaptcha = async (value: string | null) => {
@@ -52,6 +52,16 @@ export default function LoginPage() {
       }
     } catch (err: any) {
       console.error(err);
+    }
+  };
+
+  const autofillCredentials = (role: "user" | "provider") => {
+    if (role === "user") {
+      setValue("email", "user12@gmail.com");
+      setValue("password", "tanim121");
+    } else {
+      setValue("email", "provider@gmail.com");
+      setValue("password", "provider123");
     }
   };
 
@@ -76,11 +86,19 @@ export default function LoginPage() {
       "url(https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-black-meat-western-food-banner-background-image_194600.jpg)",
       backgroundSize: "cover",
       backgroundPosition: "center",
-   
     }}>
       <div className="w-full max-w-md m-auto bg-black bg-opacity-95 rounded-lg shadow-xl p-8">
         <div className="flex justify-center mb-4">
           <Image src={logo} alt="Logo" width={170} height={60} />
+        </div>
+
+        <div className="flex justify-between mb-4">
+          <Button onClick={() => autofillCredentials("user")} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+            User Credentials
+          </Button>
+          <Button onClick={() => autofillCredentials("provider")} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+            Provider Credentials
+          </Button>
         </div>
 
         <Form {...form}>
@@ -123,7 +141,6 @@ export default function LoginPage() {
               {isSubmitting ? "Logging in..." : "LOGIN"}
             </Button>
 
-         
             <p className="text-sm text-gray-600 text-center my-4">
               Don&apos;t have an account? <Link href="/register" className="text-red-600 hover:underline">Sign up</Link>
             </p>

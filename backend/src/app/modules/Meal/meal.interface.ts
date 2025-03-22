@@ -4,6 +4,8 @@ export interface IMeal extends Document {
   name: string;
   description: string;
   slug:string;
+  
+  category: Types.ObjectId;
   provider: Types.ObjectId; 
   ingredients: string[];
   price: number;

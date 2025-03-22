@@ -1,41 +1,78 @@
 import Link from "next/link";
-import { Facebook, Github, Linkedin, Twitter, Instagram } from "lucide-react"; // Import colorful icons
+import { Facebook, Github, Linkedin, Twitter } from "lucide-react";
+import Image from "next/image";
+
+import logo from "../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 
 const Footer = () => {
-    return (
-        <footer className="flex mx-auto mt-10 pt-10 h-full text-white bg-slate-100 dark:bg-black dark:text-white flex-col space-y-10 justify-center py-5">
-            <div className="flex place-content-center">
-                <h1 className="text-black dark:text-white text-center font-extrabold text-3xl">Khabar</h1>
-            </div>
+  return (
+    <footer className="bg-yellow-400 text-black px-10 pt-10 pb-5 rounded-t-3xl">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+        {/* Brand Info */}
+        <div>
+        <Link href="/">
+          <Image src={logo} height={150} width={250} alt="logo" />
+        </Link>
+       
+          <p className="mt-3 text-sm">
+            Discover culinary delights, recipes, and inspiration in our food haven.
+          </p>
+          <p className="mt-3 text-sm font-semibold">MON-FRI: 8:00 AM - 6:00 PM</p>
+          <p className="text-sm font-semibold">SATURDAY: 9:00 AM - 5:00 PM</p>
+        </div>
 
-            <nav className="flex justify-center flex-wrap gap-6 text-gray-500 font-medium">
-                <Link href="/" className="hover:text-gray-900">Home</Link>
-                <Link href="/find-meals" className="hover:text-gray-900">Meal</Link>
-                <Link href="/" className="hover:text-gray-900">Orders</Link>
-            </nav>
+        {/* Explore Links */}
+        <div>
+          <h3 className="font-bold mb-3">Explore</h3>
+          <ul className="space-y-2 text-sm">
+            <li><Link href="#" className="hover:underline">Company Profile</Link></li>
+            <li><Link href="#" className="hover:underline">About</Link></li>
+            <li><Link href="#" className="hover:underline">Help Center</Link></li>
+            <li><Link href="#" className="hover:underline">Career</Link></li>
+            <li><Link href="#" className="hover:underline">Features</Link></li>
+            <li><Link href="#" className="hover:underline">Explore</Link></li>
+          </ul>
+        </div>
 
-            <div className="flex justify-center space-x-5">
-                {/* Social Icons with Colors */}
-                <a href="https://www.facebook.com/junaeid.ahmed.450013" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                    <Facebook className="w-7 h-7 text-blue-600 hover:scale-110 transition-transform" />
-                </a>
-                <a href="https://github.com/Junaeid11" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    <Github className="w-7 h-7 text-gray-800 hover:scale-110 transition-transform" />
-                </a>
-                <a href="https://www.linkedin.com/in/junaeid-ahmed-tanim-765651285/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    <Linkedin className="w-7 h-7 text-blue-700 hover:scale-110 transition-transform" />
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                    <Twitter className="w-7 h-7 text-blue-400 hover:scale-110 transition-transform" />
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                    <Instagram className="w-7 h-7 text-pink-600 hover:scale-110 transition-transform" />
-                </a>
-            </div>
+        {/* Contact Info */}
+        <div>
+          <h3 className="font-bold mb-3">Contact Info</h3>
+          <ul className="space-y-2 text-sm">
+            <li className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-black rounded-full"></span> 175 10th Street, Office 375, Berlin, DE 21562
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-black rounded-full"></span> +123 34598768 <br /> +554 34598734
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-black rounded-full"></span> food@restan.com
+            </li>
+          </ul>
+        </div>
+      </div>
 
-            <p className="text-center text-gray-700 font-medium mb-10">&copy; 2025 Noob Ltd. All rights reserved.</p>
-        </footer>
-    );
+      {/* Social Icons */}
+      <div className="flex justify-center space-x-5 mt-8">
+        <a href="https://www.facebook.com/junaeid.ahmed.450013" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <Facebook className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
+        </a>
+        <a href="https://github.com/Junaeid11" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <Github className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
+        </a>
+        <a href="https://www.linkedin.com/in/junaeid-ahmed-tanim-765651285/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <Linkedin className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <Twitter className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
+        </a>
+      </div>
+
+      {/* Copyright */}
+      <p className="text-center text-sm text-gray-800 mt-5">
+        &copy; 2024 Foodu. All Rights Reserved
+      </p>
+    </footer>
+  );
 };
 
 export default Footer;

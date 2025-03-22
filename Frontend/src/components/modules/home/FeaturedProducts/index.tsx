@@ -9,14 +9,14 @@ const FeatureMeals = async () => {
   const { data: meals } = await getAllMeal();
 
   return (
-    <div className=" bg-white bg-opacity-50 pt-6 pb-8">
+    <div className=" bg-white/15 bg-opacity-50 pt-6 pb-8">
       <NMContainer className="my-16">
         <div className=" text-center items-center justify-between ">
           <h2 className="text-3xl font-bold">Meal Menus</h2>
 
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
-          {meals?.slice(0, 3).map((product: IMeal, idx: number) => (
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-10">
+          {meals?.slice(0, 4).map((product: IMeal, idx: number) => (
             <ProductCard key={idx} meal={product} />
           ))}
         </div>

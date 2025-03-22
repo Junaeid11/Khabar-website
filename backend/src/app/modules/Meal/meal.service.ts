@@ -62,7 +62,7 @@ const getAllMeal = async (query: Record<string, unknown>) => {
 
 
    const mealQuery = new QueryBuilder(
-      mealModel.find().populate('provider')
+      mealModel.find().populate('category').populate('provider')
       ,
       pQuery
    )
@@ -91,7 +91,7 @@ const getSingleMeal = async (mealId: string) => {
    if (!meal) {
       throw new AppError(StatusCodes.NOT_FOUND, 'Meal not found');
    }
-   const reviews = await Review.find({ meal: meal._id }).populate("user");
+   const reviews = await Review.find({ meal: meal._id }).populate('user');
 
    const productObj = meal.toObject();
 
