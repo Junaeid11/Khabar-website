@@ -6,6 +6,8 @@ import { OrderRoutes } from '../modules/order/order.routes';
 import { ReviewRoutes } from '../modules/review/review.routes';
 import { CategoryRoutes } from '../modules/category/category.routes';
 import { BlogRoute } from '../modules/Blog/blog.route';
+import { messageRoute } from '../modules/messages/m.route';
+import { SubscribeRoute } from '../modules/Newslatter/n.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -39,6 +41,14 @@ const moduleRoutes = [
    {
       path: '/blogs',
       route: BlogRoute,
+   },
+   {
+      path: '/message',
+      route: messageRoute,
+   },
+   {
+      path: '/subscribed',
+      route: SubscribeRoute,
    },
 ];
 

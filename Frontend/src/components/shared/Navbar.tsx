@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { LogOut, ShoppingCart, Menu } from "lucide-react";
+import { LogOut, ShoppingCart, Menu, Home, Book, Contact, Info, Utensils } from "lucide-react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -39,11 +39,16 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/find-meals", label: "Meals" },
-    { href: "/blogs", label: "Blogs" },
-    { href: "/contact", label: "Contact" },
-    { href: "/about", label: "About" },
+    { href: "/", label: "Home", icon: <Home className="w-5 h-5" /> },
+    {
+      href: "/find-meals",
+      label: "Meals",
+      icon: <Utensils className="w-5 h-5" />,
+     
+    },
+    { href: "/blogs", label: "Blogs", icon: <Book className="w-5 h-5" /> },
+    { href: "/contact", label: "Contact", icon: <Contact className="w-5 h-5" /> },
+    { href: "/about", label: "About", icon: <Info className="w-5 h-5" /> },
   ];
 
   return (
@@ -65,28 +70,30 @@ export default function Navbar() {
             isOpen ? "block" : "hidden"
           } absolute md:relative top-16 md:top-0 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-5 md:p-0 z-50`}
         >
-          {navLinks.map(({ href, label }) => (
-            <div key={href} className="relative">
+          {navLinks.map(({ href, label, icon, }) => (
+            <div key={href} className="relative group">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: pathname === href ? "100%" : 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute bottom-0 left-0 h-1 bg-[#2a47c8]"
+                className="absolute  left-0 h-1 "
               />
               <Link
                 href={href}
-                className={`block py-2 md:py-0 ${
+                className={`flex items-center gap-2 py-2 md:py-0 ${
                   pathname === href
                     ? "text-[#7a20e1] font-bold"
                     : "text-black hover:text-[#7B2CBF]"
                 }`}
+                
               >
+                {icon}
                 {label}
               </Link>
+
             </div>
           ))}
 
-          {/* Customer Cart Button */}
           {user?.role === "customer" && (
             <Link href="/order-meal" passHref>
               <Button variant="outline" className="rounded-full flex items-center gap-1">
@@ -96,16 +103,14 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* Provider Add Meal Button */}
           {user?.role === "provider" && (
             <Link href="post-meal-menu">
-              <Button className="rounded-full hover:bg-black hover:text-[#7B2CBF] bg-indigo-500 text-white font-extrabold">
+              <Button className="rounded-full hover:bg-amber-500 hover:text-[#181818] bg-indigo-500 text-white font-extrabold">
                 Add New Meal
               </Button>
             </Link>
           )}
 
-          {/* User Dropdown */}
           {user?.email ? (
             <DropdownMenu>
               <DropdownMenuTrigger>

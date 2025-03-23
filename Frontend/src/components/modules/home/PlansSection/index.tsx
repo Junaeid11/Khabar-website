@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function PlansSection() {
   return (
     <section className="flex flex-col md:flex-row items-center justify-between  max-w-6xl mx-20">
-      {/* Background Image Wrapper */}
+
       <div 
         className="relative w-80 h-80 md:w-[450px] md:h-[450px] flex items-center justify-center"
         style={{
@@ -36,8 +36,7 @@ export default function PlansSection() {
         <p className="text-green-600 italic font-semibold">started</p>
         <h2 className="text-3xl font-bold text-gray-900">Meal plans made for your lifestyle</h2>
         <p className="text-gray-600 mt-4">
-          Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-          Aliquam lorem ante, dapibus in, viverra quis.
+        At <span className='text-xl font-extrabold text-purple-600'>Khabar</span>, we understand that everyone’s lifestyle is unique. That&#39;s why our meal plans are crafted to fit your specific needs, whether you&rsquo;re looking for convenience, taste, or nutrition. From breakfast to dinner, we&#39;ve got you covered every step of the way.
         </p>
         <ul className="mt-6 space-y-2">
           <li className="flex items-center gap-2 text-red-600 font-semibold">

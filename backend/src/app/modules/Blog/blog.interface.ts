@@ -9,7 +9,6 @@ export interface TBlog {
     ingredients: string[];
     instructions: string[]; 
     servings: number;  
-      category: Types.ObjectId;
        
     tags?: string[];       
 

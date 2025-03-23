@@ -4,7 +4,6 @@ import { getAllReview } from "@/services/Review";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ReviewCard from "@/components/ui/core/Reviewcard";
-import NMContainer from "@/components/ui/core/NMContainer";
 import { TReview } from "@/types/review";
 
 const Testimonial = () => {
@@ -23,8 +22,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <NMContainer>
-      <div className="bg-opacity-50 py-8 overflow-hidden">
+      <div className="bg-opacity-50 py-8 mx-10 overflow-hidden">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,7 +46,6 @@ const Testimonial = () => {
           </motion.div>
         </div>
       </div>
-    </NMContainer>
   );
 };
 

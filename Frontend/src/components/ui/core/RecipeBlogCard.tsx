@@ -7,66 +7,63 @@ import { FaClock, FaUtensils, FaTag } from "react-icons/fa";
 const RecipeBlogCard = ({ blogs }: { blogs: TBlog }) => {
   return (
     <motion.div
-      className="bg-amber-400/20 rounded-lg p-6 max-w-sm mx-auto shadow-lg hover:shadow-xl transition-all duration-300"
+      className="bg-amber-400/15 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 max-w-sm mx-auto border border-gray-200"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
     >
       {/* Recipe Image */}
-      <div className="overflow-hidden rounded-lg">
+      <div className="relative overflow-hidden rounded-xl">
         <motion.div
-          className="relative"
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.3 }}
+          className="rounded-xl"
         >
           <Image
-            width={200}
-            height={230}
+            width={300}
+            height={200}
             src={blogs.image}
             alt={blogs.title}
-            className="w-full h-auto object-cover rounded-lg"
+            className="w-full h-48 object-cover rounded-xl"
           />
         </motion.div>
       </div>
 
       {/* Recipe Title */}
-      <h1 className="text-2xl font-semibold mt-4 text-red-600">{blogs.title}</h1>
-      {/* Important Data with Icons */}
-      <div className="mt-4 flex space-x-6 text-black">
-        {/* Serving Size */}
+      <h1 className="text-xl font-bold mt-4 text-gray-800 text-center">{blogs.title}</h1>
+
+      {/* Recipe Info */}
+      <div className="mt-4 flex justify-between text-gray-600 text-sm">
         <div className="flex items-center space-x-2">
           <FaUtensils className="text-red-500" />
-          <span className="text-sm">{blogs.servings} servings</span>
+          <span>{blogs.servings} servings</span>
         </div>
-
-        {/* Preparation Time */}
         <div className="flex items-center space-x-2">
-          <FaClock className="text-red-500" />
-          <span className="text-sm ">30 min</span> 
+          <FaClock className="text-blue-500" />
+          <span>30 min</span> 
         </div>
       </div>
-      <div className="mt-3 flex space-x-2 flex-wrap">
-        {blogs.tags && blogs.tags.map((tag, index) => (
+
+      {/* Tags */}
+      <div className="mt-3 flex flex-wrap gap-2 justify-center">
+        {blogs.tags?.map((tag, index) => (
           <span
             key={index}
-            className="bg-yellow-500 text-sm m-2 text-black py-1 px-3 rounded-full"
+            className="bg-yellow-400/80 text-sm text-gray-800 py-1 px-3 rounded-full flex items-center gap-1"
           >
-            <FaTag className="inline mr-1" />
+            <FaTag className="text-gray-700" />
             {tag}
           </span>
         ))}
       </div>
 
       {/* Show More Button */}
-      <Link href={`/blogs/${blogs._id}`}>
+      <Link href={`/blogs/${blogs._id}`} passHref>
         <motion.button
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition duration-200"
+          className="mt-5 px-5 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-lg shadow-md hover:shadow-lg transition duration-200 w-full"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          transition={{ duration: 0.2 }}
         >
           Show More
         </motion.button>

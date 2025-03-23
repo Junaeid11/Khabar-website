@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +19,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
-import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import Image from "next/image";
@@ -38,12 +38,10 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");
   const router = useRouter();
-
   const {
     formState: { isSubmitting },
     setValue,
   } = form;
-
   const handleReCaptcha = async (value: string | null) => {
     try {
       const res = await reCaptchaTokenVerification(value!);
@@ -54,21 +52,21 @@ export default function LoginPage() {
       console.error(err);
     }
   };
-
-  const autofillCredentials = (role: "user" | "provider") => {
-    if (role === "user") {
-      setValue("email", "user12@gmail.com");
-      setValue("password", "tanim121");
-    } else {
-      setValue("email", "provider@gmail.com");
-      setValue("password", "provider123");
-    }
+  const autofillCredentials = async (email: string, password: string) => {
+    setValue("email", email);
+    setValue("password", password);
+    setReCaptchaStatus(true);
+    await form.handleSubmit(onSubmit);
   };
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res = await loginUser(data);
       setIsLoading(true);
+      if (!reCaptchaStatus) {
+        toast.error("Please complete the reCAPTCHA.");
+        return;
+      }
+     
+      const res = await loginUser(data);
       if (res?.success) {
         toast.success(res?.message);
         router.push(redirect || "/");
@@ -81,58 +79,91 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100" style={{
-      backgroundImage:
-      "url(https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-black-meat-western-food-banner-background-image_194600.jpg)",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}>
-      <div className="w-full max-w-md m-auto bg-black bg-opacity-95 rounded-lg shadow-xl p-8">
+    <div
+      className="flex h-screen bg-black"
+      style={{
+        backgroundImage:
+          "url(https://static.vecteezy.com/system/resources/previews/008/660/558/non_2x/organic-food-background-hand-drawn-concept-free-vector.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="w-full max-w-md m-auto bg-amber-500/45 bg-opacity-95 rounded-lg shadow-xl p-8">
+        {/* Logo */}
         <div className="flex justify-center mb-4">
-          <Image src={logo} alt="Logo" width={170} height={60} />
+          <Link href="/">
+            <Image src={logo} alt="Logo" width={170} height={60} />
+          </Link>
         </div>
 
+        {/* Auto-Login Buttons */}
         <div className="flex justify-between mb-4">
-          <Button onClick={() => autofillCredentials("user")} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+          <Button
+            onClick={() => autofillCredentials("user12@gmail.com", "tanim121")}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          >
             User Credentials
           </Button>
-          <Button onClick={() => autofillCredentials("provider")} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+          <Button
+            onClick={() => autofillCredentials("provider@gmail.com", "provider123")}
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+          >
             Provider Credentials
           </Button>
         </div>
 
+        {/* Login Form */}
         <Form {...form}>
-          <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+          <motion.form
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Email Field */}
             <FormField
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Email Address</FormLabel>
+                  <FormLabel className="text-black">Email Address</FormLabel>
                   <FormControl>
-                    <Input type="email" {...field} className="w-full border-gray-300 rounded-md p-3" />
+                    <Input
+                      type="email"
+                      {...field}
+                      className="w-full border-gray-300 rounded-md p-3"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            {/* Password Field */}
             <FormField
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Password</FormLabel>
+                  <FormLabel className="text-black">Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} className="w-full border-gray-300 rounded-md p-3" />
+                    <Input
+                      type="password"
+                      {...field}
+                      className="w-full border-gray-300 rounded-md p-3"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            {/* ReCAPTCHA */}
             <div className="mt-4 flex items-center justify-center">
-              <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!} onChange={handleReCaptcha} />
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!}
+                onChange={handleReCaptcha}
+              />
             </div>
 
+            {/* Login Button */}
             <Button
               disabled={!reCaptchaStatus}
               onClick={form.handleSubmit(onSubmit)}
@@ -141,8 +172,12 @@ export default function LoginPage() {
               {isSubmitting ? "Logging in..." : "LOGIN"}
             </Button>
 
+            {/* Signup Link */}
             <p className="text-sm text-gray-600 text-center my-4">
-              Don&apos;t have an account? <Link href="/register" className="text-red-600 hover:underline">Sign up</Link>
+              Don&apos;t have an account?{" "}
+              <Link href="/register" className="text-red-600 hover:underline">
+                Sign up
+              </Link>
             </p>
           </motion.form>
         </Form>

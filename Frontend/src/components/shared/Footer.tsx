@@ -19,38 +19,33 @@ const Footer = () => {
           <p className="mt-3 text-sm font-semibold">MON-FRI: 8:00 AM - 6:00 PM</p>
           <p className="text-sm font-semibold">SATURDAY: 9:00 AM - 5:00 PM</p>
         </div>
-
-        {/* Explore Links */}
         <div>
           <h3 className="font-bold mb-3">Explore</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="#" className="hover:underline">Company Profile</Link></li>
-            <li><Link href="#" className="hover:underline">About</Link></li>
-            <li><Link href="#" className="hover:underline">Help Center</Link></li>
-            <li><Link href="#" className="hover:underline">Career</Link></li>
+            <li><Link href="/dashboard" className="hover:underline">Company Profile</Link></li>
+            <li><Link href="/about" className="hover:underline">About</Link></li>
+            <li><Link href="/contact" className="hover:underline">Contact us</Link></li>
+            <li><Link href="/about" className="hover:underline">About Us</Link></li>
             <li><Link href="#" className="hover:underline">Features</Link></li>
             <li><Link href="#" className="hover:underline">Explore</Link></li>
           </ul>
         </div>
-
-        {/* Contact Info */}
         <div>
           <h3 className="font-bold mb-3">Contact Info</h3>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
-              <span className="w-3 h-3 bg-black rounded-full"></span> 175 10th Street, Office 375, Berlin, DE 21562
+              <span className="w-3 h-3 bg-black rounded-full"></span> 370 Surot Ali Building,Commerce College Road, Motiarpool ,Chattogram
             </li>
             <li className="flex items-center gap-2">
-              <span className="w-3 h-3 bg-black rounded-full"></span> +123 34598768 <br /> +554 34598734
+              <span className="w-3 h-3 bg-black rounded-full"></span> 01910500496 
             </li>
             <li className="flex items-center gap-2">
-              <span className="w-3 h-3 bg-black rounded-full"></span> food@restan.com
+              <span className="w-3 h-3 bg-black rounded-full"></span> junaeidahmed979@gmail.com
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Social Icons */}
       <div className="bg-white/75 w-50% rounded-t-2xl flex flex-col items-center py-2 mt-8">
         <div className="flex space-x-5">
         <a href="https://www.facebook.com/junaeid.ahmed.450013" target="_blank" rel="noopener noreferrer" aria-label="Facebook">

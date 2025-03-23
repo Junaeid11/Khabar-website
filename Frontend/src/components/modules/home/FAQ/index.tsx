@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import Image from "next/image";
+import NMContainer from "@/components/ui/core/NMContainer";
 
 const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -33,7 +34,8 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className="py-10 ">
+   <NMContainer>
+     <div className="py-10 ">
       <div className=" mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
         <div className="text-center mb-10">
           <p className="text-sm text-gray-500">F.A.Q</p>
@@ -92,6 +94,7 @@ const FAQSection = () => {
         </div>
       </div>
     </div>
+   </NMContainer>
   );
 };
 

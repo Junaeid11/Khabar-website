@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import NMContainer from "@/components/ui/core/NMContainer";
 import ProductCard from "@/components/ui/core/ProductCard";
 import { getAllMeal } from "@/services/meal";
 import { IMeal } from "@/types/meal";
@@ -9,8 +8,8 @@ const FeatureMeals = async () => {
   const { data: meals } = await getAllMeal();
 
   return (
-    <div className=" bg-white/15 bg-opacity-50 pt-6 pb-8">
-      <NMContainer >
+    <div className=" bg-white/15 mx-10 bg-opacity-50 pt-6 pb-8">
+
         <div className=" text-center items-center justify-between ">
           <h2 className="text-3xl font-bold">Meal Menus</h2>
 
@@ -32,7 +31,6 @@ const FeatureMeals = async () => {
 </div>
 
 
-      </NMContainer>
     </div>
   );
 };

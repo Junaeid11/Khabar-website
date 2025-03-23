@@ -41,7 +41,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           { title: "Track Orders", url: "/dashboard/customer/track-order", icon: Bot },
         ]
       : [
-        { title: "Meal Menu", url: "/dashboard/provider", icon: SquareTerminal, isActive: true },
+        { title: "Dashboard", url: "/dashboard/provider", icon: SquareTerminal, isActive: true },
+        { title: "Meal Menu", url: "/dashboard/provider/meal-menu", icon: SquareTerminal, isActive: true },
         
         { title: "Profile", url: "/dashboard/provider/profile", icon: Bot ,isActive:true, items: [
           {

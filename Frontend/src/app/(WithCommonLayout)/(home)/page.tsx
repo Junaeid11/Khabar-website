@@ -5,6 +5,7 @@ import DeliverySection from "@/components/modules/home/delevery";
 import FAQSection from "@/components/modules/home/FAQ";
 import FeatureMeals from "@/components/modules/home/FeaturedProducts";
 import HeroSection from "@/components/modules/home/HeroSection";
+import NewsLatterSection from "@/components/modules/home/Newslatter";
 import OfferMeals from "@/components/modules/home/Offer";
 import PartnersSection from "@/components/modules/home/Partner";
 import PlansSection from "@/components/modules/home/PlansSection";
@@ -28,6 +29,7 @@ const HomePage = async () => {
       <Testimonial/>
       <WhyChooseUs/>
       <FAQSection/>
+      <NewsLatterSection/>
 
     
     </div>

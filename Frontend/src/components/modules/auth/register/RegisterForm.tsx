@@ -54,17 +54,17 @@ export default function RegisterForm() {
 
   return (
     <div
-      className="flex h-screen bg-gray-100"
+      className="flex min-h-screen bg-gray-100"
       style={{
         backgroundImage:
-          "url(https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-black-meat-western-food-banner-background-image_194600.jpg)",
+          "url(https://static.vecteezy.com/system/resources/previews/008/660/558/non_2x/organic-food-background-hand-drawn-concept-free-vector.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full max-w-md m-auto bg-black bg-opacity-95 rounded-lg shadow-xl p-8">
+      <div className="w-full max-w-md m-auto bg-amber-400/70 bg-opacity-95 rounded-lg shadow-xl p-8">
         <div className="flex justify-center mb-4">
-          <Image src={logo} alt="Logo" width={170} height={60} />
+          <Image  src={logo} alt="Logo" width={200} height={150} />
         </div>
 
         <Form {...form}>
@@ -74,7 +74,7 @@ export default function RegisterForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Name</FormLabel>
+                  <FormLabel className="text-black">Name</FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ""} className="w-full border-gray-300 rounded-md p-3" />
                   </FormControl>
@@ -88,7 +88,7 @@ export default function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Email</FormLabel>
+                  <FormLabel className="text-black">Email</FormLabel>
                   <FormControl>
                     <Input type="email" {...field} value={field.value || ""} className="w-full border-gray-300 rounded-md p-3" />
                   </FormControl>
@@ -102,7 +102,7 @@ export default function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Password</FormLabel>
+                  <FormLabel className="text-black">Password</FormLabel>
                   <FormControl>
                     <Input type="password" {...field} value={field.value || ""} className="w-full border-gray-300 rounded-md p-3" />
                   </FormControl>
@@ -116,7 +116,7 @@ export default function RegisterForm() {
               name="passwordConfirm"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Confirm Password</FormLabel>
+                  <FormLabel className="text-black">Confirm Password</FormLabel>
                   <FormControl>
                     <Input type="password" {...field} value={field.value || ""} className="w-full border-gray-300 rounded-md p-3" />
                   </FormControl>
@@ -140,7 +140,7 @@ export default function RegisterForm() {
           </form>
         </Form>
 
-        <p className="text-sm text-gray-600 text-center my-4">
+        <p className="text-sm text-black text-center my-4">
           Already have an account?{" "}
           <Link href="/login" className="text-red-600 hover:underline">
             Login
