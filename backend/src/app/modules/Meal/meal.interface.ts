@@ -19,6 +19,7 @@ export interface IMeal extends Document {
   protein?: number;
   carbs?: number;
   fat?: number;
+  discountPrice:number
   createdAt?: Date;
   updatedAt?: Date;
   stock: number;

@@ -11,6 +11,7 @@ export const getAllMeal = async (
   if (query?.rating) {
     params.append("ratings", query?.rating.toString());
   }
+  
 
   try {
     const res = await fetch(

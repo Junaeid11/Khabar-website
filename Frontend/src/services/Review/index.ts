@@ -19,3 +19,16 @@ export const addReviews = async (ReviewData: any): Promise<any> => {
     return Error(error);
   }
 };
+
+export const getAllReview = async (): Promise<any> => {
+  try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/review/all`, {
+          method: "GET",
+      })
+      revalidateTag("review");;
+      const data = await res.json();
+      return data;
+  } catch (error: any) {
+      return Error(error);
+  }
+};

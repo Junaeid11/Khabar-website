@@ -43,46 +43,67 @@ const createMeal = async (
 };
 
 
+import mongoose from "mongoose";
+
 const getAllMeal = async (query: Record<string, unknown>) => {
    const {
+      category,
+      minPrice,
+      maxPrice,
       inStock,
       ratings,
+      dietaryTags,
       ...pQuery
    } = query;
+
    const filter: Record<string, any> = {};
+
    if (inStock !== undefined) {
       filter.stock = inStock === 'true' ? { $gt: 0 } : 0;
    }
+   if (category) {
+      try {
+         filter.category = new mongoose.Types.ObjectId(category as string);
+      } catch (error) {
+         console.error("Invalid category ID:", category);
+      }
+   }
    if (ratings) {
-      const ratingArray = typeof ratings === 'string'
-         ? ratings.split(',')
+      const ratingArray = typeof ratings === "string"
+         ? ratings.split(",")
          : Array.isArray(ratings) ? ratings : [ratings];
+
       filter.averageRating = { $in: ratingArray.map(Number) };
    }
+   if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) filter.price.$gte = Number(minPrice);
+      if (maxPrice) filter.price.$lte = Number(maxPrice);
+   }
+   if (dietaryTags) {
+      const tagsArray = typeof dietaryTags === "string"
+         ? dietaryTags.split(",")
+         : Array.isArray(dietaryTags) ? dietaryTags : [dietaryTags];
 
-
+      filter.dietaryTags = { $all: tagsArray }; 
+   }
    const mealQuery = new QueryBuilder(
-      mealModel.find().populate('category').populate('provider')
-      ,
+      mealModel.find(filter).populate("category").populate("provider"),
       pQuery
    )
-      .search(['name', 'description'])
+      .search(["name", "description"])
       .filter()
       .sort()
       .paginate()
-      .fields()
+      .fields();
 
    const meals = await mealQuery.modelQuery.lean();
-   console.log(meals)
 
    const meta = await mealQuery.countTotal();
 
-
-   return {
-      meta,
-      result: meals,
-   };
+   return { meta, result: meals };
 };
+
 
 const getSingleMeal = async (mealId: string) => {
    const meal = await mealModel.findById(mealId)

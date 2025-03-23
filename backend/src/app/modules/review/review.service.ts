@@ -77,7 +77,7 @@ const createReview = async (payload: IReview, user: JwtPayload) => {
 
 const getAllReviews = async (query: Record<string, unknown>) => {
    const brandQuery = new QueryBuilder(
-      Review.find().populate('user'),
+      Review.find().populate('user').populate("meal"),
       query
    )
       .search(['review'])

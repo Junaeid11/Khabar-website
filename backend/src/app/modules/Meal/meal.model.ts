@@ -14,6 +14,7 @@ const MealSchema = new Schema<IMeal>(
     provider: { type: Schema.Types.ObjectId, ref: "User", required: true },
     ingredients: { type: [String], required: true },
     price: { type: Number, required: true },
+    discountPrice: { type: Number, required: true },
     dietaryTags: {
       type: [String],
       enum: ["vegan", "vegetarian", "gluten-free", "keto", "paleo", "halal", "kosher"],

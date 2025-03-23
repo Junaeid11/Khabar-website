@@ -6,14 +6,13 @@ import logo from "../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-yellow-400 text-black px-10 pt-10 pb-5 rounded-t-3xl">
+    <footer className="bg-yellow-400 text-black px-10 pt-10 rounded-t-3xl">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
         {/* Brand Info */}
         <div>
-        <Link href="/">
-          <Image src={logo} height={150} width={250} alt="logo" />
-        </Link>
-       
+          <Link href="/">
+            <Image src={logo} height={150} width={250} alt="logo" />
+          </Link>
           <p className="mt-3 text-sm">
             Discover culinary delights, recipes, and inspiration in our food haven.
           </p>
@@ -52,25 +51,23 @@ const Footer = () => {
       </div>
 
       {/* Social Icons */}
-      <div className="flex justify-center space-x-5 mt-8">
+      <div className="bg-white/75 w-50% rounded-t-2xl flex flex-col items-center py-2 mt-8">
+        <div className="flex space-x-5">
         <a href="https://www.facebook.com/junaeid.ahmed.450013" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <Facebook className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
-        </a>
-        <a href="https://github.com/Junaeid11" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <Github className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
-        </a>
-        <a href="https://www.linkedin.com/in/junaeid-ahmed-tanim-765651285/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <Linkedin className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <Twitter className="w-7 h-7 text-gray-600 hover:scale-110 transition-transform" />
-        </a>
+                    <Facebook className="w-7 h-7 text-blue-600 hover:scale-110 transition-transform" />
+                </a>
+                <a href="https://github.com/Junaeid11" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <Github className="w-7 h-7 text-gray-800 hover:scale-110 transition-transform" />
+                </a>
+                <a href="https://www.linkedin.com/in/junaeid-ahmed-tanim-765651285/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <Linkedin className="w-7 h-7 text-blue-700 hover:scale-110 transition-transform" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                    <Twitter className="w-7 h-7 text-blue-400 hover:scale-110 transition-transform" />
+                </a>
+            
+        </div>
       </div>
-
-      {/* Copyright */}
-      <p className="text-center text-sm text-gray-800 mt-5">
-        &copy; 2024 Foodu. All Rights Reserved
-      </p>
     </footer>
   );
 };

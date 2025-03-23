@@ -5,6 +5,7 @@ import RecipeBlogCard from "@/components/ui/core/RecipeBlogCard";
 import { getAllBlogs } from "@/services/blogs";
 import { TBlog } from "@/types/blog";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const RecipeBlogs = () => {
   const [blogs, setBlogs] = useState<TBlog[]>([]);
@@ -13,10 +14,9 @@ const RecipeBlogs = () => {
     const fetchMeals = async () => {
       try {
         const { data } = await getAllBlogs();
-        console.log("Fetched Blogs:", data); // Debug log
         setBlogs(data);
       } catch (error) {
-        console.error("Error fetching meals:", error);
+        toast.error("Error fetching meals:");
       }
     };
     fetchMeals();
@@ -24,7 +24,7 @@ const RecipeBlogs = () => {
   
   return (
     <NMContainer className="my-20">
-    <div className=" items-center text-center">
+    <div className="min-h-screen items-center text-center">
       <h2 className="text-3xl font-bold">Recipe Blogs</h2>
       <div className="grid grid-cols-3 gap-6 mt-10">
         {blogs.map((blogs, idx) => (

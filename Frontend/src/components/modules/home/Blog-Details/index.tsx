@@ -61,7 +61,7 @@ const BlogDetails = ({ blog }: { blog: TBlog }) => {
           <h2 className="text-xl font-bold flex items-center gap-2">
             <FaTag className="text-yellow-500" /> Tags:
           </h2>
-          {blog.tags.map((tag, idx) => (
+          {blog.tags && blog.tags.map((tag, idx) => (
             <span
               key={idx}
               className="bg-yellow-100 text-yellow-700 text-sm px-3 py-1 rounded-full flex items-center gap-2"

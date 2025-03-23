@@ -48,7 +48,7 @@ export default function DeliverySection() {
               initial={{ opacity: 0, y: 30 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.4, delay: index * 0.2 }}
-              className="flex flex-col items-center text-center p-6 bg-white rounded-2xl shadow-lg"
+              className="flex flex-col items-center text-center p-6 bg-white/45 rounded-2xl shadow-lg"
             >
               <div className="mb-4">{step.icon}</div>
               <h3 className="text-xl font-semibold text-black">{step.title}</h3>

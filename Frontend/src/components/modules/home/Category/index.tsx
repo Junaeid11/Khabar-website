@@ -1,7 +1,6 @@
-"use client"; // 👈 Mark as Client Component
+"use client"; 
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import NMContainer from "@/components/ui/core/NMContainer";
 import { getAllCategories } from "@/services/Category";
 
@@ -20,7 +19,7 @@ export default function Category() {
   }, []);
 
   return (
-    <NMContainer className="my-20">
+    <NMContainer className="my-5">
       <div className=" items-center text-center">
         <h2 className="text-4xl font-serif font-extrabold">Category</h2>
       </div>

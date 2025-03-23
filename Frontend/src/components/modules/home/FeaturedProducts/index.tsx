@@ -10,7 +10,7 @@ const FeatureMeals = async () => {
 
   return (
     <div className=" bg-white/15 bg-opacity-50 pt-6 pb-8">
-      <NMContainer className="my-16">
+      <NMContainer >
         <div className=" text-center items-center justify-between ">
           <h2 className="text-3xl font-bold">Meal Menus</h2>
 

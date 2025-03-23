@@ -1,4 +1,5 @@
 export interface TBlog {
+  _id:string
     title: string;
     content: string;
     author: string;
@@ -10,7 +11,7 @@ export interface TBlog {
       category: string;
        
     tags?: string[] | undefined;       
-
+   createdAt:string
     isPublished?: boolean;
     
 }

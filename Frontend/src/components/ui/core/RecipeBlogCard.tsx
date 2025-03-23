@@ -48,10 +48,8 @@ const RecipeBlogCard = ({ blogs }: { blogs: TBlog }) => {
           <span className="text-sm ">30 min</span> 
         </div>
       </div>
-
-      {/* Tags */}
       <div className="mt-3 flex space-x-2 flex-wrap">
-        {blogs.tags.map((tag, index) => (
+        {blogs.tags && blogs.tags.map((tag, index) => (
           <span
             key={index}
             className="bg-yellow-500 text-sm m-2 text-black py-1 px-3 rounded-full"

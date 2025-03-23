@@ -6,8 +6,10 @@ import FAQSection from "@/components/modules/home/FAQ";
 import FeatureMeals from "@/components/modules/home/FeaturedProducts";
 import HeroSection from "@/components/modules/home/HeroSection";
 import OfferMeals from "@/components/modules/home/Offer";
+import PartnersSection from "@/components/modules/home/Partner";
 import PlansSection from "@/components/modules/home/PlansSection";
 import RecipeBlogs from "@/components/modules/home/Recipe-Blog";
+import Testimonial from "@/components/modules/home/Testimonial";
 import TopSellingDishes from "@/components/modules/home/TopSelling";
 
 const HomePage = async () => {
@@ -20,10 +22,13 @@ const HomePage = async () => {
       <DeliverySection />
       <PlansSection/>
       <FeatureMeals/>
+      <PartnersSection/>
       <OfferMeals/>
       <RecipeBlogs/>
+      <Testimonial/>
       <WhyChooseUs/>
       <FAQSection/>
+
     
     </div>
   );

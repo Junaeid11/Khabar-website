@@ -8,6 +8,16 @@ const categorySchema = new Schema<ICategoryDocument>(
     name: {
       type: String,
       required: [true, "Category name is required"],
+      enum: [
+        "Italian",
+        "Chinese",
+        "Indian",
+        "Mexican",
+        "Thai",
+        "Japanese",
+        "Mediterranean",
+        "American",
+      ],
       unique: true,
       trim: true,
     },
