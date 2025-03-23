@@ -23,7 +23,7 @@ export default function Category() {
       <div className=" items-center text-center">
         <h2 className="text-4xl font-serif font-extrabold">Category</h2>
       </div>
-      <div className="grid grid-cols-6 gap-6 mt-10">
+      <div className="grid grid-cols-2 lg:grid-cols-6 gap-6 mt-10">
         {categories.map((category, idx) => (
           <CategoryCard key={idx} category={category} />
         ))}

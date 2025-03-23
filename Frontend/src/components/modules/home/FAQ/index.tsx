@@ -1,12 +1,12 @@
-'use client'
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import NMContainer from "@/components/ui/core/NMContainer";
 
 const FAQSection = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const toggleAccordion = (index: any) => {
+  const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
@@ -34,9 +34,8 @@ const FAQSection = () => {
   ];
 
   return (
-   <NMContainer>
-     <div className="py-10 ">
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
+    <NMContainer>
+      <div className="py-10 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <p className="text-sm text-gray-500">F.A.Q</p>
           <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
@@ -44,20 +43,8 @@ const FAQSection = () => {
           </h3>
         </div>
 
-        <div className="flex items-center space-x-8">
-          {/* FAQ Illustration Image */}
-          <div className="flex-shrink-0">
-            <Image
-              src="https://cdni.iconscout.com/illustration/premium/thumb/faq-illustration-download-in-svg-png-gif-file-formats--customer-questions-interrogation-point-and-answers-helpful-information-q-a-whoooa-solid-1-pack-people-illustrations-3779152.png?f=webp"
-              alt="FAQ Illustration"
-              width={600}
-              height={700}
-              className="object-contain"
-            />
-          </div>
-
-          {/* FAQ Accordion */}
-          <div className="flex-1">
+        <div className="flex flex-col-reverse lg:flex-row items-center lg:space-x-8">
+          <div className="flex-1 w-full">
             <ul>
               {faqData.map((item, index) => (
                 <li key={index} className="mb-6">
@@ -67,7 +54,9 @@ const FAQSection = () => {
                   >
                     <h4 className="text-lg font-semibold text-gray-900">{item.question}</h4>
                     <svg
-                      className={`transition-transform duration-300 transform ${activeIndex === index ? "rotate-180" : ""}`}
+                      className={`transition-transform duration-300 transform ${
+                        activeIndex === index ? "rotate-180" : ""
+                      }`}
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -91,10 +80,19 @@ const FAQSection = () => {
               ))}
             </ul>
           </div>
+
+          <div className="w-full max-w-sm lg:max-w-md mb-8 lg:mb-0">
+            <Image
+              src="https://cdni.iconscout.com/illustration/premium/thumb/faq-illustration-download-in-svg-png-gif-file-formats--customer-questions-interrogation-point-and-answers-helpful-information-q-a-whoooa-solid-1-pack-people-illustrations-3779152.png?f=webp"
+              alt="FAQ Illustration"
+              width={600}
+              height={700}
+              className="object-contain w-full h-auto"
+            />
+          </div>
         </div>
       </div>
-    </div>
-   </NMContainer>
+    </NMContainer>
   );
 };
 

@@ -1,12 +1,14 @@
 "use client";
 
 import * as React from "react";
-
 import {
-  Bot,
-  ListOrdered,
-  ShoppingBasketIcon,
-  SquareTerminal,
+  LayoutDashboard,
+  User,
+  Package,
+  MapPin,
+  Utensils,
+  PlusCircle,
+  CheckCircle,
 } from "lucide-react";
 
 import {
@@ -31,27 +33,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const data = {
     navMain: user?.role === "customer"
       ? [
-          { title: "Dashboard", url: "/dashboard/customer", icon: SquareTerminal, isActive: true },
-          { title: "Profile", url: `/dashboard/profile/${user.role}`, icon: Bot ,items: [
-            {
-              title: "Update My Profile",
-              url: `/dashboard/update-my-profile/${user.role}`,
-            },]},
-          { title: "My Orders", url: "/dashboard/customer/my-orders", icon: Bot },
-          { title: "Track Orders", url: "/dashboard/customer/track-order", icon: Bot },
+          { title: "Dashboard", url: "/dashboard/customer", icon: LayoutDashboard, isActive: true },
+          { 
+            title: "Profile", 
+            url: `/dashboard/profile/${user.role}`, 
+            icon: User,
+            items: [{ title: "Update My Profile", url: `/dashboard/update-my-profile/${user.role}` }]
+          },
+          { title: "My Orders", url: "/dashboard/customer/my-orders", icon: Package },
+          { title: "Track Orders", url: "/dashboard/customer/track-order", icon: MapPin },
         ]
       : [
-        { title: "Dashboard", url: "/dashboard/provider", icon: SquareTerminal, isActive: true },
-        { title: "Meal Menu", url: "/dashboard/provider/meal-menu", icon: SquareTerminal, isActive: true },
-        
-        { title: "Profile", url: "/dashboard/provider/profile", icon: Bot ,isActive:true, items: [
-          {
-            title: "Update Profile",
-            url: "/dashboard/provider/profile/update-profile",
-          },]},
-        { title: "View Order", url: "/dashboard/provider/view-order", icon: ShoppingBasketIcon },
-        { title: "Order Response", url: "/dashboard/provider/response", icon: ListOrdered },
-      ], 
+          { title: "Dashboard", url: "/dashboard/provider", icon: LayoutDashboard, isActive: true },
+          { title: "Meal Menu", url: "/dashboard/provider/meal-menu", icon: Utensils, isActive: true },
+          { title: "Post Meal", url: "/dashboard/provider/post-meal", icon: PlusCircle, isActive: true },
+          { 
+            title: "Profile", 
+            url: "/dashboard/provider/profile", 
+            icon: User, 
+            isActive: true, 
+            items: [{ title: "Update Profile", url: "/dashboard/provider/profile/update-profile" }]
+          },
+          { title: "View Order", url: "/dashboard/provider/view-order", icon: Package },
+          { title: "Order Response", url: "/dashboard/provider/response", icon: CheckCircle },
+        ], 
   };
 
   return (

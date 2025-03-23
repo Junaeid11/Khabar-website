@@ -22,7 +22,7 @@ const WhyChooseUs = () => {
   return (
     <section className="py-16 ">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-8">Why Choose Us?</h2>
+        <h2 className="text-3xl font-serif font-bold mb-8">Why Choose Us?</h2>
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div key={index} className="flex bg-white  flex-col items-center justify-center rounded-3xl p-4">

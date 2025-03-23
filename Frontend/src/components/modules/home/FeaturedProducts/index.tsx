@@ -23,7 +23,7 @@ const FeatureMeals = async () => {
   <Link href="/find-meals">
     <Button 
       variant="outline" 
-      className="px-6 py-3 text-lg font-semibold rounded-full border-1 border-black text-violet-500 hover:bg-violet-500 hover:text-white transition duration-300 shadow-md"
+      className="px-6 py-3 text-lg font-semibold rounded-full border-1 border-black text-violet-500 hover:bg-amber-500 hover:text-white transition duration-300 shadow-md"
     >
       🍽️ View All Meals
     </Button>

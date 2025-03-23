@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getAllCategories } from "@/services/Category";
-import { FaSearch, FaTag } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 const FindMeals = () => {
   const [meals, setMeals] = useState<IMeal[]>([]);
