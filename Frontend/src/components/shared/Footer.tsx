@@ -33,10 +33,10 @@ const Footer = () => {
           <h3 className="font-bold mb-3">Contact Info</h3>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
-              <span className="w-3 h-3 bg-black rounded-full"></span> 370 Surot Ali Building,Commerce College Road, Motiarpool ,Chattogram
+              <span className="w-3 h-3 bg-black rounded-full"></span>Commerce College Road ,Chattogram
             </li>
             <li className="flex items-center gap-2">
-              <span className="w-3 h-3 bg-black rounded-full"></span> 01910500496 
+              <span className="w-3 h-3 bg-black rounded-full"></span> 01111111196 
             </li>
             <li className="flex items-center gap-2">
               <span className="w-3 h-3 bg-black rounded-full"></span> junaeidahmed979@gmail.com

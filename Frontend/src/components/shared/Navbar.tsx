@@ -13,6 +13,7 @@ import {
   X,
   ChevronRight,
   CloudFog,
+  Bot,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -62,7 +63,6 @@ export default function Navbar() {
       setUser(userData);
     }
   }, []);
-  console.log(user)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -89,7 +89,7 @@ export default function Navbar() {
     { href: "/blogs", label: "Blogs", icon: <Book className="w-5 h-5" /> },
     { href: "/contact", label: "Contact", icon: <Contact className="w-5 h-5" /> },
     { href: "/about", label: "About", icon: <Info className="w-5 h-5" /> },
-    ...(user?.email ? [{ href: `/dashboard/${user?.role}/`, label: "Dashboard", icon: <Info className="w-5 h-5" /> }] : [])
+    ...(user?.email ? [{ href: `/dashboard/${user?.role}/`, label: "Dashboard", icon: <Bot className="w-5 h-5" /> }] : [])
   ];
 
   return (
@@ -109,7 +109,7 @@ export default function Navbar() {
               transition={{ duration: 0.3 }}
               className="absolute top-16 left-0 w-full bg-white shadow-md p-5 z-50 md:hidden"
             >
-              <ul className="flex flex-col gap-4">
+              <ul className="flex flex-col gap-4 ">
                 {navLinks.map(({ href, label, icon }) => (
                   <li key={href}>
                     <Link
@@ -137,7 +137,7 @@ export default function Navbar() {
           )}
         </AnimatePresence>
 
-        <nav className="hidden md:flex items-center  gap-10">
+        <nav className="hidden md:flex items-center  gap-10 space-x-2">
           {navLinks.map(({ href, label, icon }) => (
             <Link
               key={href}
@@ -160,7 +160,7 @@ export default function Navbar() {
 
           <div className="relative" ref={dropdownRef}>
             <button
-              className="flex items-center gap-2 text-black hover:text-[#7B2CBF]"
+              className="flex items-center gap-2 ml-5 text-black hover:text-[#7B2CBF]"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             >
               More

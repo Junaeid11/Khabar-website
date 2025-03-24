@@ -21,7 +21,7 @@ export const middleware = async (request: NextRequest) => {
     } else {
       return NextResponse.redirect(
         new URL(
-          `http://localhost:3000/login?redirectPath=${pathname}`,
+          `https://khabar-box.vercel.app/login?redirectPath=${pathname}`,
           request.url
         )
       );
@@ -41,7 +41,7 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
   matcher: [
     "/login",
-    "/customer:page",
-    "/provider/:page",
+    "/customer/:path*",
+    "/provider/:path*",
   ],
 };
