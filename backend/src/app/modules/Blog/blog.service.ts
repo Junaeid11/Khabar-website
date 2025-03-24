@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 
-import QueryBuilder from "../../builder/queryBuilder"
+import QueryBuilder from "../../builder/QueryBuilder"
 import AppError from "../../errors/appError"
 
 import { TBlog } from "./blog.interface"

@@ -15,6 +15,7 @@ export interface IMeal {
   }
   ingredients: string[];
   price: number;
+  discountPrice: number;
   dietaryTags: string[];
   
   imageUrls: string[];

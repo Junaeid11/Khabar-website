@@ -1,5 +1,6 @@
 "use server";
 
+import { IUser } from "@/types";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
@@ -49,16 +50,14 @@ export const loginUser = async (userData: FieldValues) => {
   }
 };
 
-export const getCurrentUser = async () => {
-  const accessToken = (await cookies()).get("accessToken")?.value;
-  let decodedData = null;
+export const getCurrentUser = async (): Promise<IUser | null> => {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-  if (accessToken) {
-    decodedData = await jwtDecode(accessToken);
-    return decodedData;
-  } else {
+  if (!accessToken) {
     return null;
   }
+  return jwtDecode(accessToken);
 };
 
 export const reCaptchaTokenVerification = async (token: string) => {
@@ -81,8 +80,10 @@ export const reCaptchaTokenVerification = async (token: string) => {
 };
 
 export const logout = async () => {
-  (await cookies()).delete("accessToken");
+  const cookieStore = await cookies();
+  cookieStore.delete("accessToken");  
 };
+
 
 export const getNewToken = async () => {
   try {

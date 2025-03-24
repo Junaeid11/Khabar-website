@@ -2,7 +2,6 @@ import { StatusCodes } from 'http-status-codes';
 import AppError from '../../errors/appError';
 import { IImageFiles } from '../../interface/IImageFile';
 import QueryBuilder from '../../builder/QueryBuilder';
-import { Order } from '../order/order.model';
 import { Review } from '../review/review.model';
 import { IMeal } from './meal.interface';
 import mealModel from './meal.model';

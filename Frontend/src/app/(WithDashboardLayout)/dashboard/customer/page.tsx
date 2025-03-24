@@ -59,7 +59,7 @@ export default function Dashboard() {
     <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card>
         <CardContent>
-          <h2 className="text-xl font-semibold">My Total Cost</h2>
+          <h2 className="text-xl font-semibold">My Cost</h2>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={priceRange}>
               <XAxis dataKey="name" />

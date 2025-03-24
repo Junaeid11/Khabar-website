@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Button } from "../ui/button";
 import {
   LogOut,
@@ -12,6 +12,7 @@ import {
   Utensils,
   X,
   ChevronRight,
+  CloudFog,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -32,16 +33,36 @@ import { orderedProductsSelector } from "@/redux/features/cartSlice";
 import Image from "next/image";
 import logo from "../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 import { motion, AnimatePresence } from "framer-motion";
+import { IUser } from "@/types";
+import { jwtDecode } from "jwt-decode";
 
 export default function Navbar() {
-  const { user, setIsLoading } = useUser();
+  const [user, setUser] = useState<IUser | null>(null);
   const pathname = usePathname();
   const router = useRouter();
   const products = useAppSelector(orderedProductsSelector);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken") || document.cookie.split('; ').find(row => row.startsWith('accessToken='));
 
+    if (accessToken) {
+      const decoded: any = jwtDecode(accessToken); 
+      const userData: any = {
+        _id: decoded.userId,
+        name: decoded.name,
+        email: decoded.email,
+        role: decoded.role,
+        isActive: decoded.isActive,
+    
+      };
+
+      setUser(userData);
+    }
+  }, []);
+  console.log(user)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -53,11 +74,11 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogOut = () => {
-    logout();
-    setIsLoading(true);
+  const handleLogOut =async () => {
+   await logout();
+    setUser(null); 
     if (protectedRoutes.some((route) => pathname.match(route))) {
-      router.push("/");
+      router.replace("/");
     }
   };
 
@@ -68,6 +89,7 @@ export default function Navbar() {
     { href: "/blogs", label: "Blogs", icon: <Book className="w-5 h-5" /> },
     { href: "/contact", label: "Contact", icon: <Contact className="w-5 h-5" /> },
     { href: "/about", label: "About", icon: <Info className="w-5 h-5" /> },
+    ...(user?.email ? [{ href: `/dashboard/${user?.role}/`, label: "Dashboard", icon: <Info className="w-5 h-5" /> }] : [])
   ];
 
   return (
@@ -101,13 +123,14 @@ export default function Navbar() {
                   </li>
                 ))}
               </ul>
+              
               {user?.email ? (
 
                 <Button onClick={handleLogOut} className="rounded-full bg-amber-500 text-white">Logout</Button>
 
               ) : (
                 <Link href="/login">
-                  <Button className="rounded-full bg-amber-500 text-white">Login</Button>
+                  <Button className="rounded-full bg-amber-500 hover:bg-amber-700 text-white">Login</Button>
                 </Link>
               )}
             </motion.nav>
@@ -115,26 +138,23 @@ export default function Navbar() {
         </AnimatePresence>
 
         <nav className="hidden md:flex items-center  gap-10">
-        {navLinks.map(({ href, label, icon }) => (
-  <Link
-    key={href}
-    href={href}
-    className={`flex items-center gap-1 p-1 relative group ${pathname === href ? "text-[#7a20e1] font-bold" : "text-black hover:text-[#7B2CBF]"}`}
-  >
-    {/* Icon */}
-    <span className="transition-all group-hover:opacity-0 duration-300 ease-in-out">
-      {icon}
-    </span>
-
-    {/* Label with bottom-to-top animation */}
-    <span
-      className="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-6 transition-all duration-300 ease-in-out"
-      style={{ transitionDelay: "200ms" }}
-    >
-      {label}
-    </span>
-  </Link>
-))}
+          {navLinks.map(({ href, label, icon }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`flex items-center gap-1 p-1 relative group ${pathname === href ? "text-[#7a20e1] font-bold" : "text-black hover:text-[#7B2CBF]"}`}
+            >
+              <span className="transition-all group-hover:opacity-0 duration-300 ease-in-out">
+                {icon}
+              </span>
+              <span
+                className="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-6 transition-all duration-300 ease-in-out"
+                style={{ transitionDelay: "200ms" }}
+              >
+                {label}
+              </span>
+            </Link>
+          ))}
 
 
 
@@ -177,8 +197,6 @@ export default function Navbar() {
                       <ChevronRight className="mr-2" size={16} /> Offers & Discounts
                     </a>
                   </div>
-
-                  {/* Category 3 */}
                   <div>
                     <h3 className="font-bold text-lg mb-2 text-[#7B2CBF]">Information</h3>
                     <a href="#blogs" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
@@ -208,8 +226,8 @@ export default function Navbar() {
               </Button>
             </Link>
           )}
-
-          {user?.email ? (
+         <div className="hidden lg:flex">
+         {user?.email ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar>
@@ -224,7 +242,7 @@ export default function Navbar() {
                   <Link href={`/dashboard/${user?.role}/`}>Dashboard</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="bg-[#7B2CBF] text-white cursor-pointer" onClick={handleLogOut}>
+                <DropdownMenuItem className="bg-amber-400 text-black cursor-pointer" onClick={handleLogOut}>
                   <LogOut />
                   <span>Log Out</span>
                 </DropdownMenuItem>
@@ -232,9 +250,10 @@ export default function Navbar() {
             </DropdownMenu>
           ) : (
             <Link href="/login">
-              <Button className="rounded-full bg-amber-500 text-white">Login</Button>
+              <Button className="rounded-full bg-amber-500 hover:bg-amber-700 text-white">Login</Button>
             </Link>
           )}
+         </div>
         </div>
         <button className="md:hidden p-2 rounded-md" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}

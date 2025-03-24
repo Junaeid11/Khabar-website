@@ -22,7 +22,6 @@ router.post(
 
 router.patch(
     '/:id',
-    auth(UserRole.ADMIN, UserRole.USER),
     multerUpload.single('icon'),
     parseBody,
     validateRequest(categoryValidation.updateCategoryValidationSchema),
@@ -31,7 +30,6 @@ router.patch(
 
 router.delete(
     '/:id',
-    auth(UserRole.ADMIN, UserRole.USER),
     CategoryController.deleteCategory
 )
 

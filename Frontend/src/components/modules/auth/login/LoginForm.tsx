@@ -32,7 +32,6 @@ export default function LoginPage() {
       password: "",
     },
   });
-
   const { setIsLoading } = useUser();
   const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
   const searchParams = useSearchParams();
@@ -89,14 +88,12 @@ export default function LoginPage() {
       }}
     >
       <div className="w-full max-w-md m-auto bg-amber-500/45 bg-opacity-95 rounded-lg shadow-xl p-8">
-        {/* Logo */}
+
         <div className="flex justify-center mb-4">
           <Link href="/">
             <Image src={logo} alt="Logo" width={170} height={60} />
           </Link>
         </div>
-
-        {/* Auto-Login Buttons */}
         <div className="flex justify-between mb-4">
           <Button
             onClick={() => autofillCredentials("user12@gmail.com", "tanim121")}

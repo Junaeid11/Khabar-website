@@ -5,7 +5,6 @@ import { IImageFile } from "../../interface/IImageFile";
 import { IJwtPayload } from "../auth/auth.interface";
 import { ICategory } from "./category.interface";
 import { Category } from "./category.model";
-import User from "../user/user.model";
 import { UserRole } from "../user/user.interface";
 import mealModel from "../Meal/meal.model";
 
@@ -72,9 +71,7 @@ const updateCategoryIntoDB = async (
     throw new AppError(StatusCodes.NOT_FOUND, "Category not found!")
   }
 
-  if ((authUser.role === UserRole.USER) && (isCategoryExist.createdBy.toString() !== authUser.userId)) {
-    throw new AppError(StatusCodes.BAD_REQUEST, "You are not able to edit the category!")
-  }
+
 
   if (file && file.path) {
     payload.icon = file.path
@@ -98,15 +95,7 @@ const deleteCategoryIntoDB = async (
     throw new AppError(StatusCodes.NOT_FOUND, 'Category not found!');
   }
 
-  if (
-    authUser.role === UserRole.USER &&
-    isBrandExist.createdBy.toString() !== authUser.userId
-  ) {
-    throw new AppError(
-      StatusCodes.BAD_REQUEST,
-      'You are not able to delete the Category!'
-    );
-  }
+  
 
   const product = await mealModel.findOne({ category: id })
   if (product) throw new AppError(StatusCodes.BAD_REQUEST, "You can not delete the Category. Because the Category is related to products.");
