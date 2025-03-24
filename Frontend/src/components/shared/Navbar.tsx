@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
 import {
   LogOut,
@@ -38,6 +38,20 @@ export default function Navbar() {
   const router = useRouter();
   const products = useAppSelector(orderedProductsSelector);
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleLogOut = () => {
     logout();
@@ -61,6 +75,7 @@ export default function Navbar() {
         <Link href="/">
           <Image src={logo} height={50} width={150} alt="logo" />
         </Link>
+
         <AnimatePresence>
           {isOpen && (
             <motion.nav
@@ -75,8 +90,9 @@ export default function Navbar() {
                   <li key={href}>
                     <Link
                       href={href}
-                      className={`flex items-center gap-2 p-3 rounded-md ${pathname === href ? "text-[#7a20e1] font-bold bg-indigo-100" : "text-black hover:text-[#7B2CBF]"
-                        }`}
+                      className={`flex items-center gap-2 p-3 rounded-md ${
+                        pathname === href ? "text-[#7a20e1] font-bold bg-indigo-100" : "text-black hover:text-[#7B2CBF]"
+                      }`}
                     >
                       {icon}
                       {label}
@@ -87,19 +103,58 @@ export default function Navbar() {
             </motion.nav>
           )}
         </AnimatePresence>
-        <nav className="hidden md:flex items-center  ml-20 gap-2">
+
+        <nav className="hidden md:flex items-center ml-20 gap-6">
           {navLinks.map(({ href, label, icon }) => (
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-2 p-2 ${pathname === href ? "text-[#7a20e1] font-bold" : "text-black hover:text-[#7B2CBF]"
-                }`}
+              className={`flex items-center gap-2 p-2 ${
+                pathname === href ? "text-[#7a20e1] font-bold" : "text-black hover:text-[#7B2CBF]"
+              }`}
             >
               {icon}
               {label}
             </Link>
           ))}
+
+          {/* More Dropdown - Toggle on Click */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              className="flex items-center gap-2 text-black hover:text-[#7B2CBF]"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              More
+              <span className="text-lg">▼</span>
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute right-5 mt-2 w-[600px] bg-white shadow-lg rounded-lg p-4 z-50">
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Category 1</h3>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 1</Link>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 2</Link>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 3</Link>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Category 2</h3>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 1</Link>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 2</Link>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 3</Link>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Category 3</h3>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 1</Link>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 2</Link>
+                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 3</Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
+
         <div className="flex items-center space-x-4">
           {user?.role === "customer" && (
             <Link href="/order-meal">
@@ -109,18 +164,6 @@ export default function Navbar() {
               </Button>
             </Link>
           )}
-        <div className="hidden md:flex">
-        {user?.role === "provider" && (
-            <Link href="post-meal-menu">
-              <Button
-                className="rounded-full hover:bg-amber-500 hover:text-[#181818] bg-indigo-500 text-white font-extrabold px-5 py-2 text-sm sm:px-3 sm:py-1 sm:text-xs"
-              >
-                Add New Meal
-              </Button>
-            </Link>
-          )}
-        </div>
-
 
           {user?.email ? (
             <DropdownMenu>
@@ -145,18 +188,11 @@ export default function Navbar() {
             </DropdownMenu>
           ) : (
             <Link href="/login">
-              <Button className="rounded-full bg-amber-500 text-white" variant="outline">Login</Button>
+              <Button className="rounded-full bg-amber-500 text-white">Login</Button>
             </Link>
           )}
-
-          {/* Mobile Menu Button */}
-          <button className="md:hidden text-black" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </div>
-
     </header>
-
   );
 }

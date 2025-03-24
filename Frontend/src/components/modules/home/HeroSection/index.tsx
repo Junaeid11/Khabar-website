@@ -10,7 +10,7 @@ export default function HeroSection() {
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url(https://wallpapers.com/images/hd/hd-food-background-d3zblbn8v3apa4mx.jpg)",
+          backgroundImage: "url(https://t3.ftcdn.net/jpg/01/74/30/92/240_F_174309231_MFxMqvpDBjBj0xaeRRX9PprID9b1H5tU.jpg)",
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
