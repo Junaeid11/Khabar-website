@@ -11,6 +11,7 @@ import {
   Info,
   Utensils,
   X,
+  ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -41,7 +42,6 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -61,6 +61,7 @@ export default function Navbar() {
     }
   };
 
+
   const navLinks = [
     { href: "/", label: "Home", icon: <Home className="w-5 h-5" /> },
     { href: "/find-meals", label: "Meals", icon: <Utensils className="w-5 h-5" /> },
@@ -70,11 +71,12 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#fce7b2] shadow-md rounded-b-2xl">
+    <header className="sticky top-0 z-50 bg-amber-400/90 shadow-md rounded-b-2xl">
       <div className="container mx-auto flex justify-between items-center h-16 px-5">
         <Link href="/">
           <Image src={logo} height={50} width={150} alt="logo" />
         </Link>
+
 
         <AnimatePresence>
           {isOpen && (
@@ -83,16 +85,15 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="sm:hidden flex absolute top-16 left-0 w-full bg-white shadow-md p-5 z-50"
+              className="absolute top-16 left-0 w-full bg-white shadow-md p-5 z-50 md:hidden"
             >
-              <ul className="flex flex-col gap-2">
+              <ul className="flex flex-col gap-4">
                 {navLinks.map(({ href, label, icon }) => (
                   <li key={href}>
                     <Link
                       href={href}
-                      className={`flex items-center gap-2 p-3 rounded-md ${
-                        pathname === href ? "text-[#7a20e1] font-bold bg-indigo-100" : "text-black hover:text-[#7B2CBF]"
-                      }`}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center gap-2 p-3 rounded-md ${pathname === href ? "text-[#7a20e1] font-bold bg-indigo-100" : "text-black hover:text-[#7B2CBF]"}`}
                     >
                       {icon}
                       {label}
@@ -100,25 +101,43 @@ export default function Navbar() {
                   </li>
                 ))}
               </ul>
+              {user?.email ? (
+
+                <Button onClick={handleLogOut} className="rounded-full bg-amber-500 text-white">Logout</Button>
+
+              ) : (
+                <Link href="/login">
+                  <Button className="rounded-full bg-amber-500 text-white">Login</Button>
+                </Link>
+              )}
             </motion.nav>
           )}
         </AnimatePresence>
 
-        <nav className="hidden md:flex items-center ml-20 gap-6">
-          {navLinks.map(({ href, label, icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`flex items-center gap-2 p-2 ${
-                pathname === href ? "text-[#7a20e1] font-bold" : "text-black hover:text-[#7B2CBF]"
-              }`}
-            >
-              {icon}
-              {label}
-            </Link>
-          ))}
+        <nav className="hidden md:flex items-center  gap-10">
+        {navLinks.map(({ href, label, icon }) => (
+  <Link
+    key={href}
+    href={href}
+    className={`flex items-center gap-1 p-1 relative group ${pathname === href ? "text-[#7a20e1] font-bold" : "text-black hover:text-[#7B2CBF]"}`}
+  >
+    {/* Icon */}
+    <span className="transition-all group-hover:opacity-0 duration-300 ease-in-out">
+      {icon}
+    </span>
 
-          {/* More Dropdown - Toggle on Click */}
+    {/* Label with bottom-to-top animation */}
+    <span
+      className="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-6 transition-all duration-300 ease-in-out"
+      style={{ transitionDelay: "200ms" }}
+    >
+      {label}
+    </span>
+  </Link>
+))}
+
+
+
           <div className="relative" ref={dropdownRef}>
             <button
               className="flex items-center gap-2 text-black hover:text-[#7B2CBF]"
@@ -131,29 +150,54 @@ export default function Navbar() {
             {dropdownOpen && (
               <div className="absolute right-5 mt-2 w-[600px] bg-white shadow-lg rounded-lg p-4 z-50">
                 <div className="grid grid-cols-3 gap-4">
+                  {/* Category 1 */}
                   <div>
-                    <h3 className="font-bold text-lg mb-2">Category 1</h3>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 1</Link>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 2</Link>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 3</Link>
+                    <h3 className="font-bold text-lg mb-2 text-[#7B2CBF]">Explore Sections</h3>
+                    <a href="#top-selling" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Top Selling Dishes
+                    </a>
+                    <a href="#delivery" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Delivery Section
+                    </a>
+                    <a href="#plans" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Plans Section
+                    </a>
                   </div>
+
+                  {/* Category 2 */}
                   <div>
-                    <h3 className="font-bold text-lg mb-2">Category 2</h3>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 1</Link>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 2</Link>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 3</Link>
+                    <h3 className="font-bold text-lg mb-2 text-[#7B2CBF]">More Features</h3>
+                    <a href="#feature-meals" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Featured Meals
+                    </a>
+                    <a href="#partners" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Partners
+                    </a>
+                    <a href="#offers" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Offers & Discounts
+                    </a>
                   </div>
+
+                  {/* Category 3 */}
                   <div>
-                    <h3 className="font-bold text-lg mb-2">Category 3</h3>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 1</Link>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 2</Link>
-                    <Link href="#" className="block text-gray-600 hover:text-[#7B2CBF]">Link 3</Link>
+                    <h3 className="font-bold text-lg mb-2 text-[#7B2CBF]">Information</h3>
+                    <a href="#blogs" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Recipe Blogs
+                    </a>
+                    <a href="#testimonials" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> Testimonials
+                    </a>
+                    <a href="#faq" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                      <ChevronRight className="mr-2" size={16} /> FAQs
+                    </a>
                   </div>
                 </div>
               </div>
             )}
+
           </div>
         </nav>
+
 
         <div className="flex items-center space-x-4">
           {user?.role === "customer" && (
@@ -192,6 +236,9 @@ export default function Navbar() {
             </Link>
           )}
         </div>
+        <button className="md:hidden p-2 rounded-md" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+        </button>
       </div>
     </header>
   );

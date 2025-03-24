@@ -60,32 +60,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Team */}
-      <section className="bg-gray-200 py-16">
-        <div className="container mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl font-bold text-gray-800">Meet Our Team</h2>
-          <div className="mt-8 grid gap-8 md:grid-cols-3">
-            <div className="bg-white p-6 shadow-lg rounded-lg">
-              <Image src="/images/team1.jpg" alt="Team Member 1" width={150} height={150} className="rounded-full mx-auto" />
-              <h3 className="mt-4 text-xl font-bold text-gray-700">John Doe</h3>
-              <p className="text-gray-600">Founder & CEO</p>
-            </div>
-            <div className="bg-white p-6 shadow-lg rounded-lg">
-              <Image src="/images/team2.jpg" alt="Team Member 2" width={150} height={150} className="rounded-full mx-auto" />
-              <h3 className="mt-4 text-xl font-bold text-gray-700">Jane Smith</h3>
-              <p className="text-gray-600">Head Chef</p>
-            </div>
-            <div className="bg-white p-6 shadow-lg rounded-lg">
-              <Image src="/images/team3.jpg" alt="Team Member 3" width={150} height={150} className="rounded-full mx-auto" />
-              <h3 className="mt-4 text-xl font-bold text-gray-700">Emily Johnson</h3>
-              <p className="text-gray-600">Customer Support</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Call-to-Action */}
-      <section className="bg-[#7B2CBF] text-white py-16 text-center">
+      <section className="bg-[#e5ab17] text-white py-16 text-center">
         <h2 className="text-3xl font-bold">Join Our Community</h2>
         <p className="mt-4 text-lg">Experience the best meal delivery service today!</p>
         <Link

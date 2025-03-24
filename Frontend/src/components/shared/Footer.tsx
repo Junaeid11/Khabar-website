@@ -6,7 +6,7 @@ import logo from "../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-yellow-400 text-black px-10 pt-10 rounded-t-3xl">
+    <footer className="bg-yellow-400/50 text-black px-10 pt-10 rounded-t-3xl">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
         {/* Brand Info */}
         <div>
@@ -22,12 +22,11 @@ const Footer = () => {
         <div>
           <h3 className="font-bold mb-3">Explore</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/dashboard" className="hover:underline">Company Profile</Link></li>
-            <li><Link href="/about" className="hover:underline">About</Link></li>
+            <li><Link href="/" className="hover:underline">Home</Link></li>
+            <li><Link href="/find-meals" className="hover:underline">Find Meal</Link></li>
             <li><Link href="/contact" className="hover:underline">Contact us</Link></li>
             <li><Link href="/about" className="hover:underline">About Us</Link></li>
-            <li><Link href="#" className="hover:underline">Features</Link></li>
-            <li><Link href="#" className="hover:underline">Explore</Link></li>
+            <li><Link href="/blog" className="hover:underline">Recipe Blogs</Link></li>
           </ul>
         </div>
         <div>

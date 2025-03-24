@@ -19,7 +19,7 @@ export default function Category() {
   }, []);
 
   return (
-    <NMContainer className="my-5">
+    <NMContainer className="my-10">
       <div className=" items-center text-center">
         <h2 className="text-4xl font-serif font-extrabold">Category</h2>
       </div>
