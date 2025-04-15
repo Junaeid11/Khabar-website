@@ -60,13 +60,11 @@ const RecipeBlogCard = ({ blogs }: { blogs: TBlog }) => {
 
       {/* Show More Button */}
       <Link href={`/blogs/${blogs._id}`} passHref>
-        <motion.button
-          className="mt-5 px-5 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-lg shadow-md hover:shadow-lg transition duration-200 w-full"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <button
+          className="mt-5 px-5 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg shadow-md hover:shadow-lg transition duration-200 w-full"
         >
           Show More
-        </motion.button>
+        </button>
       </Link>
     </motion.div>
   );

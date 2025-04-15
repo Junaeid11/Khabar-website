@@ -56,20 +56,11 @@ const MealDetails = ({ meal }: { meal: IMeal }) => {
             {meal?.stock <= 0 ? (
               <p className="text-red-600 font-semibold">Out of Stock</p>
             ) : (
-              <p className="text-green-600 font-semibold">{meal?.stock} items available</p>
+              <p className="text-amber-600 font-semibold">{meal?.stock} items available</p>
             )}
           </div>
 
-          <div className="my-4">
-            <p className="text-sm text-gray-500">Choose Portion Size:</p>
-            <input
-              type="number"
-              min={0}
-              value={portionSize}
-              onChange={(e) => setPortionSize(parseInt(e.target.value))}
-              className="w-20 p-2 border rounded-md"
-            />
-          </div>
+        
 
           <div className="flex items-center justify-between my-4 text-gray-500 text-sm">
             <span className="flex items-center gap-1 text-yellow-700 font-semibold">
@@ -80,7 +71,7 @@ const MealDetails = ({ meal }: { meal: IMeal }) => {
           </div>
           <div className="flex gap-2 mb-4">
             {meal?.dietaryTags.map((tag, idx) => (
-              <span key={idx} className="bg-green-100 text-green-700 text-sm py-1 px-3 rounded-full">
+              <span key={idx} className="bg-amber-100 text-amber-700 text-sm py-1 px-3 rounded-full">
                 {tag}
               </span>
             ))}
@@ -102,7 +93,7 @@ const MealDetails = ({ meal }: { meal: IMeal }) => {
 
           {/* Action Buttons */}
           <div className="flex gap-4 mt-6">
-            <Button onClick={() => handleAddProduct(meal)} className="w-full bg-purple-500 hover:bg-black text-white" disabled={meal?.stock <= 0}>
+            <Button onClick={() => handleAddProduct(meal)} className="w-full bg-[#bf6c2c] hover:bg-[#bf492c] " disabled={meal?.stock <= 0}>
               Add to Cart
             </Button>
           </div>
@@ -111,17 +102,15 @@ const MealDetails = ({ meal }: { meal: IMeal }) => {
 
       {/* Nutritional Facts, Ingredients, and Preparation */}
       <div className="max-w-6xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg">
-        <h3 className="text-xl font-bold text-purple-500">Nutritional Facts & Ingredients</h3>
+        <h3 className="text-xl font-bold text-amber-500">Nutritional Facts & Ingredients</h3>
         <p className="mt-2 font-semibold text-lg">Ingredients:</p>
         <p className="text-gray-700 flex flex-col">{meal?.ingredients.join(" • ")}</p>
         <p className="mt-4 font-semibold text-lg">How to Prepare:</p>
         <p className="text-gray-600">Keep refrigerated until ready to serve. If desired, vent cover and microwave for 2-3 minutes. Not intended for oven use.</p>
       </div>
-
-      {/* Reviews Section */}
       <ReviewCard mealId={meal?._id} />
       <div className="max-w-6xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg">
-        <h3 className="text-xl font-bold text-purple-500">Customer Reviews</h3>
+        <h3 className="text-xl font-bold text-amber-500">Customer Reviews</h3>
 
         {Array.isArray(meal?.reviews) && meal.reviews.length > 0 ? (
           meal.reviews.map((review: any) => (

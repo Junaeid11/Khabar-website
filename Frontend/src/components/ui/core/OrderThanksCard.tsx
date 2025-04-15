@@ -26,7 +26,7 @@ export const ThankYouContent = () => {
         <p className="text-gray-500 mt-4">You will receive a confirmation email with your order details shortly.</p>
 
         <Link href="/">
-          <button className="bg-white hover:text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-violet-600 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
+          <button className="bg-white hover:text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-amber-600 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
             Back to Home
           </button>
         </Link>

@@ -33,8 +33,7 @@ export default function PlansSection() {
 
       {/* Text Section */}
       <div className="max-w-lg text-center md:text-left mt-8 md:mt-0">
-        <p className="text-green-600 italic font-semibold">started</p>
-        <h2 className="text-3xl font-bold text-gray-900">Meal plans made for your lifestyle</h2>
+        <h2 className="text-3xl font-bold font-serif text-gray-900">Meal plans made for your lifestyle</h2>
         <p className="text-gray-600 mt-4">
         At <span className='text-xl font-extrabold text-purple-600'>Khabar</span>, we understand that everyone’s lifestyle is unique. That&#39;s why our meal plans are crafted to fit your specific needs, whether you&rsquo;re looking for convenience, taste, or nutrition. From breakfast to dinner, we&#39;ve got you covered every step of the way.
         </p>

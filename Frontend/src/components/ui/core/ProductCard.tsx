@@ -12,7 +12,7 @@ import { useUser } from "@/context/UserContext";
 import { addProduct } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { IMeal } from "@/types/meal";
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart, Star, UtensilsCrossed } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -27,62 +27,75 @@ const ProductCard = ({ meal }: { meal: IMeal }) => {
   };
 
   return (
-    <Card className="p-4 border bg-amber-400/15 border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
-      <CardHeader className="relative p-0">
-        <div className="w-full h-48 overflow-hidden rounded-lg">
+    <Card className="rounded-xl overflow-hidden border border-amber-500 shadow-md hover:shadow-xl transition-all bg-amber-500/15">
+      {/* Image Section */}
+      <CardHeader className="relative p-0 group">
+        <div className="w-full h-44  relative">
           <Image
             src={
               meal?.imageUrls[0] ||
               "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
             }
+            alt={meal?.name}
             width={500}
             height={500}
-            alt={meal?.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
         </div>
-        {meal?.stock === 0 && (
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-md">
+
+        {/* Out of Stock Badge */}
+        {meal.stock === 0 && (
+          <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded z-10">
             Out of Stock
           </div>
         )}
       </CardHeader>
 
-      {/* Product Info */}
-      <CardContent className="mt-3">
-        <Link href={`/find-meal/${meal._id}`} passHref>
-          <CardTitle className="text-lg font-semibold text-gray-800  transition cursor-pointer">
-            {meal?.name.length > 22 ? `${meal?.name?.slice(0, 22)}...` : meal?.name}
+      {/* Info */}
+      <CardContent className="p-4 space-y-2">
+        {/* Category Name Tag */}
+        {meal?.category?.name && (
+          <div className="text-xs font-semibold text-orange-600 bg-orange-100 inline-block px-3 py-1 rounded-full mb-1">
+            {meal.category.name}
+          </div>
+        )}
+
+        <Link href={`/find-meal/${meal._id}`}>
+          <CardTitle className="text-lg font-bold text-gray-800 hover:text-orange-500 transition cursor-pointer flex items-center gap-1">
+            <UtensilsCrossed className="w-4 h-4 text-orange-400" />
+            {meal.name.length > 22 ? `${meal.name.slice(0, 22)}...` : meal.name}
           </CardTitle>
         </Link>
 
-        <div className="flex items-center justify-between mt-2 text-sm text-gray-600">
-          <p className="font-semibold text-lg text-red-500">${meal?.price.toFixed(2)}</p>
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 text-yellow-500" fill="orange" stroke="orange" />
-            <span className="text-gray-700">4.5</span>
+        <div className="flex justify-between items-center text-sm">
+          <p className="text-red-500 font-semibold text-base">
+            ${meal?.discountPrice?.toFixed(2) || meal?.price?.toFixed(2)}
+          </p>
+          <div className="flex items-center gap-1 text-yellow-500">
+            <Star className="w-4 h-4 fill-yellow-400" />
+            <span className="text-gray-800">{meal.rating?.toFixed(1) || "4.5"}</span>
           </div>
         </div>
       </CardContent>
 
-      {/* Buttons */}
-      <CardFooter className="mt-3">
-        <div className="flex justify-between w-full">
-          <Link href={`/find-meals/${meal._id}`} passHref>
-            <Button size="sm" variant="outline" className="w-32 bg-gradient-to-r from-red-500 to-orange-500 text-white hover:bg-amber-400/10 hover:text-red">
-              View Details
-            </Button>
-          </Link>
+      <CardFooter className="flex justify-between items-center p-4 pt-0">
+        <Link href={`/find-meals/${meal._id}`}>
           <Button
-            onClick={() => handleAddProduct(meal)}
-            disabled={meal?.stock === 0 || user?.role !== "customer"}
             variant="outline"
             size="sm"
-            className="w-9 h-9 p-0 flex items-center justify-center rounded-full border-gray-400 hover:bg-gray-200"
+            className="rounded-full text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:bg-amber-200-100"
           >
-            <ShoppingCart className="w-5 h-5 text-gray-600" />
+            View
           </Button>
-        </div>
+        </Link>
+        <Button
+          onClick={() => handleAddProduct(meal)}
+          disabled={meal.stock === 0 || user?.role !== "customer"}
+          size="icon"
+          className="rounded-full  border bg-white  hover:bg-orange-100"
+        >
+          <ShoppingCart className="w-5 h-5 text-black" />
+        </Button>
       </CardFooter>
     </Card>
   );

@@ -163,22 +163,38 @@ const FindMeals = () => {
           <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {paginatedMeals.map((meal) => (
-            <div key={meal._id} className="bg-white shadow-lg rounded-lg p-4">
-              <Image width={100} height={100} src={meal.imageUrls[0]} alt={meal.name} className="w-full h-48 object-cover rounded-md" />
-              <h3 className="text-lg font-bold mt-2">{meal.name}</h3>
-              <p className="text-yellow-500 text-sm">⭐ {meal.rating}</p>
-              <p className="text-red-500 font-bold text-sm">${meal.price}</p>
-              <Link href={`/find-meals/${meal._id}`}>
-                <Button>See Details</Button>
-              </Link>
-            </div>
-          ))}
+  {paginatedMeals.map((meal) => (
+    <div
+      key={meal._id}
+      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group"
+    >
+      <Image
+        width={400}
+        height={300}
+        src={meal.imageUrls[0]}
+        alt={meal.name}
+        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+      <div className="p-4 flex flex-col gap-2">
+        <h3 className="text-xl font-semibold text-gray-800 truncate">{meal.name}</h3>
+        <div className="flex items-center justify-between text-sm">
+          <p className="text-yellow-500 font-medium">⭐ {meal.rating}</p>
+          <p className="text-red-600 font-bold">${meal.price}</p>
         </div>
+        <Link href={`/find-meals/${meal._id}`} className="mt-2">
+          <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black text-sm font-medium rounded-lg shadow-md transition-colors">
+            See Details
+          </Button>
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
+
         <div className="mt-6 flex justify-center gap-4">
-          <Button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</Button>
+          <Button className="bg-amber-400 text-black hover:bg-amber-500" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</Button>
           <span>Page {currentPage} of {totalPages}</span>
-          <Button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Next</Button>
+          <Button className="bg-amber-400 text-black hover:bg-amber-500" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Next</Button>
         </div>
       </div>
     </div>

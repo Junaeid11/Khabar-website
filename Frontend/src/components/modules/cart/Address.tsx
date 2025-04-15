@@ -24,7 +24,7 @@ export default function Address() {
           <Textarea
             onChange={(e) => handleShippingAddress(e.target.value)}
             rows={2}
-            className="bg-slate-200"
+            className="bg-slate-200  "
           />
         </div>
       </div>

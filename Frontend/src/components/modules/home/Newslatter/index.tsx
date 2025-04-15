@@ -68,7 +68,7 @@ const NewsLatterSection = () => {
                         <Button 
                             onClick={handleSubmit}
                             disabled={loading} 
-                            className="bg-gradient-to-r from-red-500 to-orange-500  text-white font-medium px-6 py-3 h-full hover:bg-yellow-600 transition"
+                            className="bg-gradient-to-r from-amber-500 to-orange-500  text-white font-medium px-6 py-3 h-full hover:bg-yellow-600 transition"
                         >
                             {loading ? "Subscribing..." : "Subscribe"}
                         </Button>

@@ -43,7 +43,7 @@ const ReviewPostCard = ({ mealId }: { mealId: string }) => {
   };
   
   return (
-    <div className="border p-6 rounded-lg shadow-md bg-white">
+    <div className="border p-6 rounded-lg shadow-md mt-5 bg-white">
       <h3 className="text-lg font-bold text-gray-800">Write a Review</h3>
 
       <div className="flex gap-1 my-3">
@@ -59,14 +59,14 @@ const ReviewPostCard = ({ mealId }: { mealId: string }) => {
       </div>
 
       <textarea
-        className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
+        className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none"
         rows={3}
         placeholder="Share your thoughts..."
         value={review}
         onChange={(e) => setReviewText(e.target.value)}
       />
       <Button
-        className="mt-4 w-full bg-green-500 hover:bg-green-600 text-white"
+        className="mt-4 w-full bg-amber-500 hover:bg-amber-600 text-white"
         onClick={handleSubmit}
         disabled={loading}
       >

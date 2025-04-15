@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ReviewCard from "@/components/ui/core/Reviewcard";
 import { TReview } from "@/types/review";
+import NMContainer from "@/components/ui/core/NMContainer";
 
 const Testimonial = () => {
   const [review, setReview] = useState<TReview[]>([]);
@@ -22,7 +23,8 @@ const Testimonial = () => {
   }, []);
 
   return (
-      <div className="bg-opacity-50 py-8 mx-10 overflow-hidden">
+      <NMContainer>
+        <div className="bg-opacity-50 py-8 px-2 overflow-hidden">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -46,6 +48,7 @@ const Testimonial = () => {
           </motion.div>
         </div>
       </div>
+      </NMContainer>
   );
 };
 

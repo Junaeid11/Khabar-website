@@ -1,5 +1,6 @@
 "use client";
 
+import NMContainer from "@/components/ui/core/NMContainer";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -12,7 +13,8 @@ const deliveryPartners = [
 
 const PartnersSection = () => {
   return (
-    <div className="min-h-60 dark:bg-gray-900 bg-white/30 lg:p-10 overflow-hidden">
+ <NMContainer>
+     <div className="min-h-60 lg:p-10 overflow-hidden">
       <h2 className="text-center text-3xl font-serif md:text-3xl font-bold mb-6 text-gray-900 dark:text-white py-10">
         Our Food Delivery Partners
       </h2>
@@ -42,6 +44,7 @@ const PartnersSection = () => {
         </motion.div>
       </div>
     </div>
+ </NMContainer>
   );
 };
 

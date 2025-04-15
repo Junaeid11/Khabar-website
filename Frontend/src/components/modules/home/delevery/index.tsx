@@ -1,20 +1,21 @@
 "use client";
 import { Truck, Laptop, Utensils } from "lucide-react";
 import { motion } from "framer-motion";
+import NMContainer from "@/components/ui/core/NMContainer";
 
 const deliverySteps = [
   {
-    icon: <Laptop size={60} className="text-purple-500" />,
+    icon: <Laptop size={60} className="text-amber-500" />,
     title: "Select Your Meals",
     description: "Choose from hundreds of restaurant-quality selections, rotating weekly.",
   },
   {
-    icon: <Truck size={60} className="text-purple-500" />,
+    icon: <Truck size={60} className="text-amber-500" />,
     title: "Cooked & Delivered Fresh",
     description: "Fully prepared fresh & delicious meals are delivered right to your door!",
   },
   {
-    icon: <Utensils size={60} className="text-purple-500" />,
+    icon: <Utensils size={60} className="text-amber-500" />,
     title: "Heat, Eat, Bon Appétit!",
     description: "All of our meals are ready in three minutes or less!",
   },
@@ -22,8 +23,9 @@ const deliverySteps = [
 
 export default function DeliverySection() {
   return (
-    <section className=" text-Black py-16 px-6">
-      <div className="container mx-auto text-center">
+   <NMContainer>
+     <section className=" text-Black my-20">
+      <div className=" mx-auto text-center">
         <motion.h3 
           initial={{ opacity: 0, y: -20 }} 
           animate={{ opacity: 1, y: 0 }} 
@@ -36,7 +38,7 @@ export default function DeliverySection() {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6 }}
-          className="text-3xl font-bold mt-2"
+          className="text-3xl font-bold mt-2 font-serif"
         >
           Hundreds of Rotating Meals Each Week
         </motion.h2>
@@ -58,5 +60,6 @@ export default function DeliverySection() {
         </div>
       </div>
     </section>
+   </NMContainer>
   );
 }

@@ -6,7 +6,7 @@ import logo from "../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-yellow-400/50 text-black px-10 pt-10 rounded-t-3xl">
+    <footer className="bg-orange-400/50 text-black px-10 pt-10 rounded-t-3xl">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
         {/* Brand Info */}
         <div>

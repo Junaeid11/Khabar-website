@@ -85,7 +85,7 @@ export default function PaymentDetails() {
         </div>
       <Button
         onClick={handleOrder}
-        className="w-full text-xl font-semibold py-5"
+        className="w-full bg-amber-500 hover:bg-orange-300 text-xl font-semibold py-5"
       >
         Order Now
       </Button>

@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import TopSellingCard from "@/components/ui/core/TopSellingCard";
 import { getAllMeal } from "@/services/meal";
 import { IMeal } from "@/types/meal";
+import NMContainer from "@/components/ui/core/NMContainer";
 
 const TopSellingDishes = () => {
   const [meals, setMeals] = useState<IMeal[]>([]);
@@ -27,7 +28,8 @@ const TopSellingDishes = () => {
   }, []);
 
   return (
-    <div className="h-[80vh]  py-8">
+   <NMContainer>
+     <div className="h-[70vh]  py-8">
       <div className="max-w-6xl mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -59,6 +61,7 @@ const TopSellingDishes = () => {
         </Swiper>
       </div>
     </div>
+   </NMContainer>
   );
 };
 
