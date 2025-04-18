@@ -8,10 +8,23 @@ import Link from "next/link";
 import Loading from "@/components/ui/loading";
 import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getAllCategories } from "@/services/Category";
 import { FaSearch } from "react-icons/fa";
+import { UtensilsCrossed, Star, ShoppingCart } from "lucide-react";
+
+import { toast } from "sonner";
+import { addProduct } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
+
+// Temporary or context-based placeholders for user & add-to-cart logic
 
 const FindMeals = () => {
   const [meals, setMeals] = useState<IMeal[]>([]);
@@ -25,7 +38,6 @@ const FindMeals = () => {
   const [selectedDietaryTags, setSelectedDietaryTags] = useState<string[]>([]);
   const [stockFilter, setStockFilter] = useState<string | null>(null);
 
-  // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const mealsPerPage = 6;
 
@@ -46,6 +58,13 @@ const FindMeals = () => {
     };
     fetchMeals();
   }, []);
+  const user = { role: "customer" };
+  const dispatch = useAppDispatch();
+
+  const handleAddProduct = (meal: IMeal) => {
+    toast.success("Meal added to Cart!");
+    dispatch(addProduct(meal));
+  }
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -77,7 +96,9 @@ const FindMeals = () => {
     }
 
     if (selectedCategories.length > 0) {
-      updatedMeals = updatedMeals.filter((meal) => selectedCategories.includes(meal.category?._id));
+      updatedMeals = updatedMeals.filter((meal) =>
+        selectedCategories.includes(meal.category?._id)
+      );
     }
 
     if (selectedDietaryTags.length > 0) {
@@ -97,12 +118,11 @@ const FindMeals = () => {
     }
 
     setFilteredMeals(updatedMeals);
-    setCurrentPage(1); // Reset to first page when filters change
+    setCurrentPage(1);
   }, [searchTerm, ratingFilter, selectedCategories, selectedDietaryTags, stockFilter, price, meals]);
 
   if (loading) return <Loading />;
 
-  // Pagination Logic
   const indexOfLastMeal = currentPage * mealsPerPage;
   const indexOfFirstMeal = indexOfLastMeal - mealsPerPage;
   const paginatedMeals = filteredMeals.slice(indexOfFirstMeal, indexOfLastMeal);
@@ -110,6 +130,7 @@ const FindMeals = () => {
 
   return (
     <div className="p-6 w-full flex gap-6">
+      {/* Sidebar Filters */}
       <div className="w-72">
         <Card className="p-4 rounded-2xl shadow-md">
           <CardContent>
@@ -120,7 +141,14 @@ const FindMeals = () => {
             <h2 className="text-lg font-semibold mt-6">Dietary Tags</h2>
             {dietaryTags.map((tag) => (
               <div key={tag} className="flex items-center gap-2">
-                <Checkbox checked={selectedDietaryTags.includes(tag)} onCheckedChange={() => setSelectedDietaryTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag])} />
+                <Checkbox
+                  checked={selectedDietaryTags.includes(tag)}
+                  onCheckedChange={() =>
+                    setSelectedDietaryTags((prev) =>
+                      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+                    )
+                  }
+                />
                 <span>{tag}</span>
               </div>
             ))}
@@ -128,7 +156,16 @@ const FindMeals = () => {
             <h2 className="text-lg font-semibold mt-6">Category</h2>
             {categories.map((category) => (
               <div key={category._id} className="flex items-center gap-2">
-                <Checkbox checked={selectedCategories.includes(category._id)} onCheckedChange={() => setSelectedCategories(prev => prev.includes(category._id) ? prev.filter(id => id !== category._id) : [...prev, category._id])} />
+                <Checkbox
+                  checked={selectedCategories.includes(category._id)}
+                  onCheckedChange={() =>
+                    setSelectedCategories((prev) =>
+                      prev.includes(category._id)
+                        ? prev.filter((id) => id !== category._id)
+                        : [...prev, category._id]
+                    )
+                  }
+                />
                 <span>{category.name}</span>
               </div>
             ))}
@@ -137,7 +174,10 @@ const FindMeals = () => {
             <ul className="space-y-2 mt-2">
               {ratings.map((rating) => (
                 <li key={rating} className="flex items-center gap-2">
-                  <Checkbox checked={ratingFilter === rating} onCheckedChange={() => setRatingFilter(prev => (prev === rating ? null : rating))} />
+                  <Checkbox
+                    checked={ratingFilter === rating}
+                    onCheckedChange={() => setRatingFilter((prev) => (prev === rating ? null : rating))}
+                  />
                   <span className="text-yellow-500">
                     {"★".repeat(rating)}
                     {"☆".repeat(5 - rating)}
@@ -149,9 +189,11 @@ const FindMeals = () => {
         </Card>
       </div>
 
+      {/* Meal Grid */}
       <div className="flex-1">
         <h2 className="text-2xl font-bold text-center mb-4">Find Delicious Meals</h2>
 
+        {/* Search Box */}
         <div className="relative w-full mb-4">
           <input
             type="text"
@@ -162,39 +204,101 @@ const FindMeals = () => {
           />
           <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-  {paginatedMeals.map((meal) => (
-    <div
-      key={meal._id}
-      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group"
-    >
-      <Image
-        width={400}
-        height={300}
-        src={meal.imageUrls[0]}
-        alt={meal.name}
-        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-      <div className="p-4 flex flex-col gap-2">
-        <h3 className="text-xl font-semibold text-gray-800 truncate">{meal.name}</h3>
-        <div className="flex items-center justify-between text-sm">
-          <p className="text-yellow-500 font-medium">⭐ {meal.rating}</p>
-          <p className="text-red-600 font-bold">${meal.price}</p>
-        </div>
-        <Link href={`/find-meals/${meal._id}`} className="mt-2">
-          <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black text-sm font-medium rounded-lg shadow-md transition-colors">
-            See Details
-          </Button>
-        </Link>
-      </div>
-    </div>
-  ))}
-</div>
 
+        {/* Meal Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {paginatedMeals.map((meal) => (
+            <Card
+              key={meal._id}
+              className="rounded-xl overflow-hidden border border-amber-500 shadow-md hover:shadow-xl transition-all bg-amber-500/15"
+            >
+              <CardHeader className="relative p-0 group">
+                <div className="w-full h-44 relative">
+                  <Image
+                    src={
+                      meal?.imageUrls?.[0] ||
+                      "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
+                    }
+                    alt={meal?.name}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                {meal.stock === 0 && (
+                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded z-10">
+                    Out of Stock
+                  </div>
+                )}
+              </CardHeader>
+
+              <CardContent className="p-4 space-y-2">
+                {meal?.category?.name && (
+                  <div className="text-xs font-semibold text-orange-600 bg-orange-100 inline-block px-3 py-1 rounded-full mb-1">
+                    {meal.category.name}
+                  </div>
+                )}
+
+                <Link href={`/find-meal/${meal._id}`}>
+                  <CardTitle className="text-lg font-bold text-gray-800 hover:text-orange-500 transition cursor-pointer flex items-center gap-1">
+                    <UtensilsCrossed className="w-4 h-4 text-orange-400" />
+                    {meal.name.length > 22 ? `${meal.name.slice(0, 22)}...` : meal.name}
+                  </CardTitle>
+                </Link>
+
+                <div className="flex justify-between items-center text-sm">
+                  <p className="text-red-500 font-semibold text-base">
+                    ${meal?.discountPrice?.toFixed(2) || meal?.price?.toFixed(2)}
+                  </p>
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    <Star className="w-4 h-4 fill-yellow-400" />
+                    <span className="text-gray-800">{meal.rating?.toFixed(1) || "4.5"}</span>
+                  </div>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex justify-between items-center p-4 pt-0">
+                <Link href={`/find-meals/${meal._id}`}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:bg-amber-200-100"
+                  >
+                    View
+                  </Button>
+                </Link>
+                <Button
+                  onClick={() => handleAddProduct(meal)}
+                  disabled={meal.stock === 0 || user?.role !== "customer"}
+                  size="icon"
+                  className="rounded-full border bg-white hover:bg-orange-100"
+                >
+                  <ShoppingCart className="w-5 h-5 text-black" />
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        {/* Pagination */}
         <div className="mt-6 flex justify-center gap-4">
-          <Button className="bg-amber-400 text-black hover:bg-amber-500" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</Button>
-          <span>Page {currentPage} of {totalPages}</span>
-          <Button className="bg-amber-400 text-black hover:bg-amber-500" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Next</Button>
+          <Button
+            className="bg-amber-400 text-black hover:bg-amber-500"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            Previous
+          </Button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            className="bg-amber-400 text-black hover:bg-amber-500"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next
+          </Button>
         </div>
       </div>
     </div>

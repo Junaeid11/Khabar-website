@@ -24,7 +24,7 @@ const deliverySteps = [
 export default function DeliverySection() {
   return (
    <NMContainer>
-     <section className=" text-Black my-20">
+     <section className="px-2 text-Black my-20">
       <div className=" mx-auto text-center">
         <motion.h3 
           initial={{ opacity: 0, y: -20 }} 
@@ -32,7 +32,7 @@ export default function DeliverySection() {
           transition={{ duration: 0.5 }}
           className="text-gray-500 text-lg font-semibold uppercase"
         >
-          How <span className="font-extrabold text-purple-500 text-xl">&lsquo;Khabar&rsquo;</span> Works
+          How <span className="font-extrabold text-amber-500 text-xl">&lsquo;Khabar&rsquo;</span> Works
         </motion.h3>
         <motion.h2 
           initial={{ opacity: 0, y: 20 }} 

@@ -24,7 +24,7 @@ const Testimonial = () => {
 
   return (
       <NMContainer>
-        <div className="bg-opacity-50 py-8 px-2 overflow-hidden">
+        <div className="bg-opacity-50 py-8 px-6 overflow-hidden">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

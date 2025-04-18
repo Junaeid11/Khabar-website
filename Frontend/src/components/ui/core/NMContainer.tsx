@@ -7,7 +7,7 @@ interface NMContainerProps {
 
 const NMContainer = ({ children, className = "" }: NMContainerProps) => {
   return (
-    <div className={`container mx-auto  ${className}`}>{children}</div>
+    <div className={` mx-5  ${className}`}>{children}</div>
   );
 };
 

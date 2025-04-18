@@ -34,7 +34,7 @@ const NewsLatterSection = () => {
     };
     
     return (
-       <NMContainer>
+       <NMContainer className='px-5'>
          <section
             className="w-full rounded-2xl mb-5 min-h-screen bg-cover bg-center flex items-center justify-center relative"
             style={{

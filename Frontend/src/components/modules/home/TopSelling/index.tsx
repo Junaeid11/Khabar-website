@@ -30,7 +30,7 @@ const TopSellingDishes = () => {
   return (
    <NMContainer>
      <div className="h-[70vh]  py-8">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className=" mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

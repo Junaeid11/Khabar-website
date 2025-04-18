@@ -14,7 +14,7 @@ const deliveryPartners = [
 const PartnersSection = () => {
   return (
  <NMContainer>
-     <div className="min-h-60 lg:p-10 overflow-hidden">
+     <div className="min-h-60  overflow-hidden">
       <h2 className="text-center text-3xl font-serif md:text-3xl font-bold mb-6 text-gray-900 dark:text-white py-10">
         Our Food Delivery Partners
       </h2>

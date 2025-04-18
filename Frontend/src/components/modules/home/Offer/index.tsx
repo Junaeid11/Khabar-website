@@ -8,7 +8,6 @@ const OfferMeals = async () => {
   const { data: meals } = await getAllMeal();
 
   return (
-    <div className="">
       <NMContainer className="my-16">
         <div className="text-center">
           <h2 className="text-3xl font-serif font-bold">Offer Meals</h2>
@@ -20,7 +19,7 @@ const OfferMeals = async () => {
           ))}
         </div>
       </NMContainer>
-    </div>
+
   );
 };
 
