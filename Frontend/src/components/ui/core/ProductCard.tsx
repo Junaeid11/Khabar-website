@@ -60,7 +60,7 @@ const ProductCard = ({ meal }: { meal: IMeal }) => {
           </div>
         )}
 
-        <Link href={`/find-meal/${meal._id}`}>
+        <Link href={`/find-meals/${meal._id}`}>
           <CardTitle className="text-lg font-bold text-gray-800 hover:text-orange-500 transition cursor-pointer flex items-center gap-1">
             <UtensilsCrossed className="w-4 h-4 text-orange-400" />
             {meal.name.length > 22 ? `${meal.name.slice(0, 22)}...` : meal.name}
@@ -90,7 +90,6 @@ const ProductCard = ({ meal }: { meal: IMeal }) => {
         </Link>
         <Button
           onClick={() => handleAddProduct(meal)}
-          disabled={meal.stock === 0 || user?.role !== "customer"}
           size="icon"
           className="rounded-full  border bg-white  hover:bg-orange-100"
         >

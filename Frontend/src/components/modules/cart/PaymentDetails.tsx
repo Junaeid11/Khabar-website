@@ -28,7 +28,7 @@ export default function PaymentDetails() {
   const handleOrder = async () => {
     const orderLoading = toast.loading("Order is being placed");
     try {
-      if (!user.user) {
+      if (!user) {
         router.push("/login");
         throw new Error("Please login first.");
       }
@@ -57,7 +57,6 @@ export default function PaymentDetails() {
         shippingAddress,
         paymentMethod: "Online",
       }
-      console.log(orderData)
 
       const res = await createOrder(orderData);
 
